@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Witch's Almanac 2026</title>
+
+<style>
+:root {
+  --void: #05030d;
+  --deep: #0d0620;
+  --dusk: #1a0d35;
+  --ink: #2a1a50;
+  --gold: #c49a2a;
+  --gold-light: #e0b84a;
+  --gold-pale: #f0d88a;
+  --silver: #c0bcd5;
+  --rose: #8a3050;
+  --sage: #3a5c38;
+  --ember: #a04020;
+  --parchment: #f2e8d5;
+  --border: rgba(196,154,42,0.22);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--void);color:var(--parchment);font-family:Georgia,'Times New Roman',serif;min-height:100vh;overflow-x:hidden}
+
+/* starfield */
+.stars{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse at 25% 25%,#180830 0%,transparent 55%),
+             radial-gradient(ellipse at 75% 75%,#080f20 0%,transparent 50%),#03010a}
+.stars::before{content:'';position:absolute;inset:0;
+  background-image:
+    radial-gradient(1px 1px at 7% 11%,rgba(255,251,230,.75) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 19% 6%,rgba(192,188,213,.6) 0%,transparent 100%),
+    radial-gradient(1px 1px at 34% 18%,rgba(255,251,230,.8) 0%,transparent 100%),
+    radial-gradient(1px 1px at 51% 4%,rgba(255,251,230,.5) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 67% 14%,rgba(255,251,230,.7) 0%,transparent 100%),
+    radial-gradient(1px 1px at 83% 9%,rgba(192,188,213,.65) 0%,transparent 100%),
+    radial-gradient(1px 1px at 13% 43%,rgba(255,251,230,.45) 0%,transparent 100%),
+    radial-gradient(2px 2px at 44% 52%,rgba(255,251,230,.6) 0%,transparent 100%),
+    radial-gradient(1px 1px at 72% 37%,rgba(192,188,213,.55) 0%,transparent 100%),
+    radial-gradient(1px 1px at 91% 48%,rgba(255,251,230,.5) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 6% 71%,rgba(255,251,230,.4) 0%,transparent 100%),
+    radial-gradient(1px 1px at 37% 79%,rgba(192,188,213,.55) 0%,transparent 100%),
+    radial-gradient(1px 1px at 59% 68%,rgba(255,251,230,.5) 0%,transparent 100%),
+    radial-gradient(1px 1px at 78% 83%,rgba(255,251,230,.45) 0%,transparent 100%),
+    radial-gradient(1px 1px at 28% 94%,rgba(192,188,213,.4) 0%,transparent 100%)}
+
+.wrap{position:relative;z-index:1;max-width:1060px;margin:0 auto;padding:0 1.25rem 5rem}
+
+/* HEADER */
+header{text-align:center;padding:3rem 1rem 2rem;border-bottom:1px solid var(--border)}
+.hglyph{font-size:2.5rem;animation:pulse 5s ease-in-out infinite alternate}
+@keyframes pulse{from{filter:drop-shadow(0 0 8px rgba(192,188,213,.4))}to{filter:drop-shadow(0 0 24px rgba(196,154,42,.55))}}
+header h1{font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;letter-spacing:0.1em;font-size:clamp(1.4rem,3.8vw,2.5rem);color:var(--gold-pale);letter-spacing:.1em;text-shadow:0 0 40px rgba(196,154,42,.35),0 2px 8px rgba(0,0,0,.9);margin:.4rem 0}
+header p{font-family:Georgia,'Times New Roman',serif;font-style:italic;color:var(--silver);font-size:.95rem;opacity:.8}
+.hrule{display:flex;align-items:center;gap:1rem;max-width:380px;margin:1.1rem auto 0;justify-content:center}
+.hrule div{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:.4}
+.hrule span{color:var(--gold);opacity:.7;font-size:1rem}
+
+/* NAV */
+.month-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.35rem;margin:1.8rem 0 1.2rem}
+.mnav-btn{font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.65rem;letter-spacing:.09em;text-transform:uppercase;
+  padding:.4rem .75rem;background:rgba(26,13,53,.5);border:1px solid rgba(196,154,42,.2);
+  color:var(--silver);cursor:pointer;border-radius:2px;transition:all .2s}
+.mnav-btn:hover,.mnav-btn.on{background:rgba(196,154,42,.18);border-color:var(--gold);color:var(--gold-pale)}
+
+/* MONTH PANEL */
+.mpanel{display:none;animation:fadeIn .35s ease}
+.mpanel.on{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* SEASON BANNER */
+.season-banner{text-align:center;padding:1.8rem 1rem 1.2rem;margin-bottom:1.2rem;
+  border-bottom:1px solid var(--border)}
+.season-banner h2{font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;letter-spacing:0.1em;font-size:clamp(1.2rem,3vw,2rem);color:var(--gold-light);letter-spacing:.1em}
+.season-banner p{font-family:Georgia,'Times New Roman',serif;font-style:italic;color:var(--silver);font-size:.92rem;max-width:520px;margin:.4rem auto 0;line-height:1.65;opacity:.82}
+
+/* TOPIC TABS */
+.topic-row{display:flex;flex-wrap:wrap;gap:.35rem;justify-content:center;margin-bottom:1.4rem}
+.tbtn{font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.63rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.38rem .85rem;background:rgba(13,6,32,.7);border:1px solid rgba(196,154,42,.18);
+  color:var(--silver);cursor:pointer;border-radius:2px;transition:all .2s}
+.tbtn:hover,.tbtn.on{border-color:var(--gold);color:var(--gold-pale);background:rgba(196,154,42,.15)}
+
+/* CONTENT BLOCKS */
+.content-area{display:none}
+.content-area.on{display:block}
+
+/* WEEKLY STRIPS */
+.week-strip{margin-bottom:1rem;border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.week-head{background:rgba(26,13,53,.9);padding:.65rem 1rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .2s}
+.week-head:hover{background:rgba(45,25,80,.9)}
+.week-head.on{background:rgba(45,25,80,.95)}
+.week-label{font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light)}
+.week-moon{font-size:.78rem;color:var(--silver);opacity:.7}
+.week-chevron{color:var(--gold);opacity:.6;font-size:.8rem;transition:transform .2s}
+.week-head.on .week-chevron{transform:rotate(180deg)}
+.week-body{display:none;background:rgba(5,3,13,.7)}
+.week-body.on{display:block}
+
+/* DAY ENTRIES */
+.day-entry{border-bottom:1px solid rgba(196,154,42,.08);padding:1rem 1.2rem}
+.day-entry:last-child{border-bottom:none}
+.day-date{font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);opacity:.65;margin-bottom:.3rem}
+.day-title{font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.88rem;letter-spacing:.06em;color:var(--gold-pale);margin-bottom:.5rem}
+.day-body{font-size:.88rem;line-height:1.78;color:rgba(242,232,213,.82)}
+.day-body strong{color:var(--parchment);font-weight:600}
+.day-body em{font-style:italic;color:rgba(192,188,213,.9)}
+
+/* SPELL BLOCKS */
+.spell-block{background:rgba(26,13,53,.6);border:1px solid rgba(196,154,42,.2);border-radius:3px;padding:.9rem 1.1rem;margin:.6rem 0}
+.spell-block h4{font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);opacity:.8;margin-bottom:.5rem}
+.spell-block p,.spell-block li{font-size:.86rem;line-height:1.72;color:rgba(242,232,213,.8)}
+.spell-block ol,.spell-block ul{padding-left:1.1rem;margin-top:.35rem}
+.spell-block li{margin-bottom:.2rem}
+.incant{font-family:Georgia,'Times New Roman',serif;font-style:italic;background:rgba(196,154,42,.07);border-left:2px solid var(--gold);padding:.5rem .8rem;border-radius:0 3px 3px 0;margin:.5rem 0;font-size:.9rem;color:rgba(240,216,138,.9);line-height:1.7}
+
+/* AI ORACLE */
+.oracle-box{background:rgba(13,6,32,.8);border:1px solid rgba(196,154,42,.25);border-radius:4px;padding:1.4rem 1.6rem;margin:1rem 0}
+.oracle-box h3{font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);opacity:.8;margin-bottom:.7rem}
+.oracle-prompt{width:100%;background:rgba(5,3,13,.8);border:1px solid rgba(196,154,42,.2);border-radius:3px;padding:.6rem .8rem;color:var(--parchment);font-family:Georgia,'Times New Roman',serif;font-size:.92rem;resize:vertical;min-height:70px;outline:none;transition:border .2s}
+.oracle-prompt:focus{border-color:rgba(196,154,42,.5)}
+.oracle-btn{margin-top:.6rem;font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1.4rem;background:rgba(196,154,42,.18);border:1px solid var(--gold);color:var(--gold-pale);cursor:pointer;border-radius:2px;transition:all .2s}
+.oracle-btn:hover{background:rgba(196,154,42,.3)}
+.oracle-response{margin-top:.9rem;font-size:.9rem;line-height:1.78;color:rgba(242,232,213,.85);min-height:2rem;white-space:pre-wrap}
+.loading-dots{display:inline-flex;gap:.3rem;align-items:center;padding:.4rem 0}
+.loading-dots span{width:6px;height:6px;background:var(--gold);border-radius:50%;opacity:.4;animation:dot 1.2s infinite}
+.loading-dots span:nth-child(2){animation-delay:.2s}
+.loading-dots span:nth-child(3){animation-delay:.4s}
+@keyframes dot{0%,80%,100%{opacity:.2}40%{opacity:.9}}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--void)}
+::-webkit-scrollbar-thumb{background:rgba(196,154,42,.28);border-radius:3px}
+
+@media(max-width:580px){
+  .topic-row .tbtn{font-size:.58rem;padding:.3rem .6rem}
+  .day-entry{padding:.75rem .85rem}
+}
+</style>
+</head>
+<body>
+
+
+  <!-- Phone bookmark banner -->
+  <div id="phoneBanner" style="display:none;background:rgba(196,154,42,0.15);border-bottom:1px solid rgba(196,154,42,0.3);padding:.6rem 1rem;text-align:center;font-size:.75rem;color:rgba(240,216,138,.9);letter-spacing:.05em;font-family:Georgia,serif">
+    📱 <strong>To use daily on your phone:</strong> Tap Share → "Add to Home Screen" to save as an app icon
+    <button onclick="document.getElementById('phoneBanner').style.display='none'" style="margin-left:1rem;background:none;border:1px solid rgba(196,154,42,.4);color:var(--gold-light);font-size:.65rem;padding:.2rem .5rem;cursor:pointer;border-radius:2px">✕</button>
+  </div>
+  <script>
+    // Show banner on mobile
+    if (/iPhone|iPad|Android/i.test(navigator.userAgent)) {
+      document.getElementById('phoneBanner').style.display = 'block';
+    }
+  </script>
+
+<div class="stars"></div>
+<div class="wrap">
+
+<header>
+  <div class="hglyph">☽ ✦ ☾</div>
+  <h1>The Daily Witch's Almanac</h1>
+  <p>A Full Year of Magic — Spells, Rituals, Herbalism, Divination & Sacred Teachings · 2026</p>
+  <div class="hrule"><div></div><span>✦</span><div></div></div>
+</header>
+
+<div class="month-nav" id="mnav"></div>
+
+<div id="panels"></div>
+
+<!-- AI ORACLE -->
+<div class="oracle-box" style="margin-top:2.5rem">
+  <h3>✦ The Oracle — Ask Anything of Your Craft</h3>
+  <p style="font-size:.85rem;color:rgba(192,188,213,.7);margin-bottom:.7rem;line-height:1.6">Ask the Oracle for a custom spell, a tarot interpretation, rune guidance, herbal recipe, ritual for tonight's moon phase, or any magical teaching.</p>
+  <textarea class="oracle-prompt" id="oracleInput" placeholder="e.g. Give me a candle magic spell for releasing grief under the waning moon… or Teach me the Elder Futhark rune Algiz… or Write me a Samhain incantation for honoring my ancestors…"></textarea>
+  <button class="oracle-btn" onclick="askOracle()">Consult the Oracle ✦</button>
+  <div class="oracle-response" id="oracleOut"></div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+// ═══════════════════════════════════════════════
+// DATA — Full Year Almanac Content
+// ═══════════════════════════════════════════════
+
+const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+const MOON_2026 = {
+  // month-day: phase emoji + name
+  "1-3":"🌕 Full Wolf Moon","1-18":"🌑 New Moon",
+  "2-1":"🌕 Full Snow Moon","2-17":"🌑 New Moon + Partial Solar Eclipse",
+  "3-3":"🌕 Full Worm Moon + Total Lunar Eclipse","3-19":"🌑 New Moon",
+  "4-1":"🌕 Full Pink Moon","4-16":"🌑 New Moon",
+  "5-1":"🌕 Full Flower Moon","5-31":"🌑 New Moon",
+  "6-14":"🌕 Full Strawberry Moon","6-29":"🌑 New Moon",
+  "7-14":"🌕 Full Buck Moon","7-28":"🌑 New Moon",
+  "8-12":"🌕 Full Sturgeon Moon","8-27":"🌑 New Moon",
+  "9-11":"🌕 Full Harvest Moon","9-25":"🌑 New Moon",
+  "10-11":"🌕 Full Hunter's Moon","10-25":"🌑 New Moon",
+  "11-10":"🌕 Full Beaver Moon","11-24":"🌑 New Moon",
+  "12-9":"🌕 Full Cold Moon","12-23":"🌑 New Moon",
+};
+
+const SABBATS = {
+  "2-1":"Imbolc","3-20":"Ostara","5-1":"Beltane","6-20":"Litha",
+  "8-1":"Lughnasadh","9-22":"Mabon","10-31":"Samhain","12-21":"Yule"
+};
+
+const TOPICS = [
+  {id:"spell",label:"✦ Spells & Magic"},
+  {id:"lunar",label:"🌕 Lunar Work"},
+  {id:"herb",label:"🌿 Herbalism"},
+  {id:"tarot",label:"🃏 Tarot"},
+  {id:"rune",label:"ᚱ Runes"},
+  {id:"altar",label:"🕯 Altar"},
+  {id:"astro",label:"♑ Astrology"},
+  {id:"poetry",label:"📜 Poetry & Incantation"},
+  {id:"ritual",label:"🔥 Ritual Practice"},
+  {id:"divination",label:"🔮 Divination"},
+  {id:"manifest",label:"✨ Manifestation"},
+  {id:"shadow",label:"🌑 Shadow Work"},
+];
+
+// ── MONTH META ──
+const MONTH_META = [
+  {season:"Winter's Depth",essence:"The wolf howls at the first full moon. Earth dreams beneath frost; intention-seeds wait in the dark. This is the month to plant wishes in the void.",lunarTheme:"Wolf Moon in Cancer — intuition, home, dreams",element:"Earth & Water",sabbat:null,waning:"Release old identity; clear what cluttered 2025",waxing:"Plant fresh intentions for the year's entire arc"},
+  {season:"First Stirring",essence:"Brigid's flame pierces the cold. The land does not yet show it, but underground everything is moving. Purification, dedication, the poet's fire.",lunarTheme:"Snow Moon in Leo + Solar Eclipse — radiance, reinvention",element:"Fire & Water",sabbat:"Imbolc (Feb 1)",waning:"Release grief, dead weight, old wounds",waxing:"New identity, creative fire, sacred commitments"},
+  {season:"Breaking Ground",essence:"The Blood Eclipse cracks the sky. Shadow spills across the Worm Moon. Death and resurrection. The earth thaws and so do you.",lunarTheme:"Worm Moon + Total Lunar Eclipse — transformation, shadow",element:"Earth & Fire",sabbat:"Ostara (Mar 20)",waning:"Shadow work, releasing what the eclipse reveals",waxing:"Ostara renewal, seeds of spring, joyful beginnings"},
+  {season:"Green Awakening",essence:"The world blushes pink. Beltane approaches and the earth is dizzy with want. Love magic reaches peak potency as May Eve approaches.",lunarTheme:"Pink Moon in Libra — love, beauty, balance",element:"Air & Water",sabbat:null,waning:"Relationships past their time, patterns of unworthiness",waxing:"Love spells, beauty magic, calling in partnership"},
+  {season:"Beltane Fire",essence:"The year's great eruption. Beltane and the Flower Moon collide on May 1 — the most potent magical day of 2026. The veil thins, the fires burn, the sacred marriage blazes.",lunarTheme:"Flower Moon ON Beltane — the year's peak power",element:"Fire & Earth",sabbat:"Beltane (May 1)",waning:"Stagnation, fear, anything dimming your fire",waxing:"Passion, manifestation, sacred union, abundance"},
+  {season:"Midsummer Bloom",essence:"Litha crowns the sun. The God stands at his peak and begins his descent. Every herb gathered at noon carries healing. The longest day holds summer's great exhale.",lunarTheme:"Strawberry Moon in Sagittarius — expansion, truth",element:"Fire & Air",sabbat:"Litha (Jun 20)",waning:"What no longer serves at the peak of your power",waxing:"Solar spells, courage, vitality, career"},
+  {season:"Honey Depth",essence:"The Blessing Moon. Summer deepens into gold. Long days for outdoor ritual, crystal charging, plant magic. The hive mind hums.",lunarTheme:"Buck Moon in Capricorn — achievement, earned growth",element:"Earth & Fire",sabbat:null,waning:"Imposter syndrome, what you've outgrown",waxing:"Ambition spells, long-term goals, professional power"},
+  {season:"First Harvest",essence:"Lughnasadh opens. The grain god sacrifices himself willingly. First loaves, golden fields, the bittersweet taste of what was earned. A time to give back.",lunarTheme:"Sturgeon Moon in Aquarius — community, collective healing",element:"Earth & Air",sabbat:"Lughnasadh (Aug 1)",waning:"What no longer feeds you, excess, over-commitment",waxing:"Gratitude magic, abundance, collective spellwork"},
+  {season:"Balance & Release",essence:"Mabon weighs the scales. Day and night equal — then the dark wins. The God descends. Gratitude, grief, and the great letting go of autumn.",lunarTheme:"Harvest Moon in Pisces — mystical release, completion",element:"Earth & Water",sabbat:"Mabon (Sep 22)",waning:"What must die before winter; release with grace",waxing:"Gratitude spells, wisdom harvesting, protective work"},
+  {season:"The Thinning Veil",essence:"Samhain approaches. October belongs entirely to the dead, the dark, and the deep. The Hunter's Moon illuminates bare fields. Divination is stronger than any other month.",lunarTheme:"Hunter's Moon in Aries — courage, ancestor contact",element:"Water & Air",sabbat:"Samhain (Oct 31)",waning:"All year's unfinished business, hexes, banishing",waxing:"Ancestor contact, spirit communication, protection"},
+  {season:"Ancestor Time",essence:"The beloved dead walk near. The Beaver Moon guards the long nights. Grief is sacred. Rest is medicine. The wheel turns toward Yule.",lunarTheme:"Beaver Moon in Taurus — grounding, body wisdom, home",element:"Earth & Water",sabbat:null,waning:"Old grief ready to transform, ancestral patterns",waxing:"Ancestor honoring, healing lineage wounds, home protection"},
+  {season:"Holy Dark",essence:"The longest night approaches. Yule kindles light in absolute darkness. The Oak King stirs. Every candle is an act of faith. The year closes in the womb of winter.",lunarTheme:"Cold Moon in Gemini — duality, reflection, year's end",element:"Earth & Fire",sabbat:"Yule (Dec 21)",waning:"The entire year's shadows; final release",waxing:"Year intentions, rebirth prayers, the newborn sun"},
+];
+
+// ── WEEKLY CONTENT ──
+// Each month has 4-5 week objects with entries per topic
+function getWeekContent(month, week, topic) {
+  const m = month; const w = week;
+
+  // SPELLS
+  if(topic==="spell") return getSpell(m,w);
+  if(topic==="lunar") return getLunar(m,w);
+  if(topic==="herb") return getHerb(m,w);
+  if(topic==="tarot") return getTarot(m,w);
+  if(topic==="rune") return getRune(m,w);
+  if(topic==="altar") return getAltar(m,w);
+  if(topic==="astro") return getAstro(m,w);
+  if(topic==="poetry") return getPoetry(m,w);
+  if(topic==="ritual") return getRitual(m,w);
+  if(topic==="divination") return getDivination(m,w);
+  if(topic==="manifest") return getManifest(m,w);
+  if(topic==="shadow") return getShadow(m,w);
+  return "<p>Content coming soon.</p>";
+}
+
+// ── RUNES (rotating through 24 Elder Futhark) ──
+const RUNES = [
+  {r:"ᚠ",n:"Fehu",k:"Cattle, Wealth, Abundance",u:"Prosperity flows toward you. Carry this rune when applying for work or opening new financial ventures. Draw it in gold on a green candle.",rev:"Unearned wealth slips through fingers. Give before asking."},
+  {r:"ᚢ",n:"Uruz",k:"Aurochs, Raw Power, Health",u:"The wild ox charges. Stamina, physical healing, primal strength. Carve into a red candle when recovering from illness or beginning a demanding new path.",rev:"Blocked vitality. Rest and nourish before the next charge."},
+  {r:"ᚦ",n:"Thurisaz",k:"Thorn, Giant, Protection",u:"The thorn that draws blood before entering the rose garden. A rune of protection and necessary challenge. Banishing, protection circles, confronting what must be faced.",rev:"Beware aggression turned inward. Do not thorn yourself."},
+  {r:"ᚨ",n:"Ansuz",k:"Mouth, Odin, Sacred Speech",u:"The breath of Odin. Words carry power — this rune blesses spoken spells, incantations, and any work involving communication, writing, or teaching.",rev:"Miscommunication, lies, blocked inspiration."},
+  {r:"ᚱ",n:"Raidho",k:"Ride, Journey, Rhythm",u:"The sacred journey — literal travel and the inner pilgrimage. Cast for safe travel, finding your path, or aligning with the natural rhythm of a situation.",rev:"Detours, delay. Look more closely at the terrain."},
+  {r:"ᚲ",n:"Kenaz",k:"Torch, Knowledge, Creativity",u:"The witch's torch. Illumination, creative fire, the craft knowledge that comes from within. Draw on a yellow candle when beginning new magical studies.",rev:"Creative block. The flame has gone underground — seek it there."},
+  {r:"ᚷ",n:"Gebo",k:"Gift, Exchange, Partnership",u:"X marks the exchange. All magic involves exchange — you give something to receive something. This rune blesses partnerships, love, and any situation of mutual giving.",rev:"Gebo has no reversal. Give freely and receive freely."},
+  {r:"ᚹ",n:"Wunjo",k:"Joy, Harmony, Wish-Fulfillment",u:"The wish-rune. Draw Wunjo and speak your deepest joy-wish. This rune is most powerful when cast in gold ink on a yellow candle during the waxing moon.",rev:"Estrangement. Joy blocked by unaddressed grief."},
+  {r:"ᚺ",n:"Hagalaz",k:"Hail, Disruption, Transformation",u:"The hailstorm that destroys and fertilizes simultaneously. Hagalaz signals necessary disruption — something must shatter so better things can grow. Welcome the storm.",rev:"No reversal. The hail falls where it will."},
+  {r:"ᚾ",n:"Nauthiz",k:"Need, Constraint, Endurance",u:"The need-fire. Limitations teach. This rune strengthens endurance through difficulty and can be used to identify what you truly need versus what you merely want.",rev:"Necessity becomes neurosis. Examine your constraints closely."},
+  {r:"ᛁ",n:"Isa",k:"Ice, Stillness, Clarity",u:"Everything stops. Not as punishment — as revelation. The frozen surface shows perfectly what lies beneath. A rune for meditation, scrying, halting a harmful situation.",rev:"No reversal. Stillness is always its own teaching."},
+  {r:"ᛃ",n:"Jera",k:"Year, Harvest, Right Timing",u:"The harvest rune. What was sown is now reaped — in proper time, never before. Cast Jera into spell work that must grow slowly. Patience is the magic.",rev:"No reversal. The year turns as it turns."},
+  {r:"ᛇ",n:"Eihwaz",k:"Yew, Axis, Death-Life Cycle",u:"The World Tree's spine. Life and death intertwined on the same branch. A rune for ancestral work, shamanic journeying, and connecting to the deep roots of existence.",rev:"Confusion about endings and beginnings."},
+  {r:"ᛈ",n:"Perthro",k:"Dice Cup, Fate, Mystery",u:"The rune of what is hidden. The wyrd, the fate-weaving of the Norns. Cast Perthro when consulting oracles, reading runes or tarot — it deepens the veil-opening.",rev:"Secrets not yet ready to be revealed. Wait."},
+  {r:"ᛉ",n:"Algiz",k:"Elk, Protection, Divine Connection",u:"The most powerful protection rune. Draw as a ward on your door, altar, body, or in the air. Algiz connects to higher guidance and shields from spiritual harm.",rev:"Guard your energy; you may be giving protection but not receiving it."},
+  {r:"ᛊ",n:"Sowilo",k:"Sun, Victory, Wholeness",u:"The sun-wheel spinning. Success, solar power, the victory that comes from being wholly yourself. Cast Sowilo for healing, confidence, and any sun-magic at Litha.",rev:"No reversal. The sun always rises."},
+  {r:"ᛏ",n:"Tiwaz",k:"Tyr, Justice, Sacrifice",u:"The one-handed god who sacrificed his hand for justice. Honor, courage, self-sacrifice for the greater good. Cast in legal matters, commitments, and moments requiring genuine courage.",rev:"Injustice, broken promises, self-sacrifice that harms."},
+  {r:"ᛒ",n:"Berkano",k:"Birch, Fertility, New Beginnings",u:"The birch tree, first to grow after fire. This is the rune of new life, feminine cycles, birth and rebirth. Cast at Imbolc, for pregnancy, new projects, and healing the womb.",rev:"Family troubles, stifled growth."},
+  {r:"ᛖ",n:"Ehwaz",k:"Horse, Partnership, Movement",u:"Two horses in step — trust, partnership, steady forward movement. The rune of symbiosis between self and other. Cast for travel, partnerships, and trust in the journey.",rev:"Mistrust, opposition, moving against your own rhythm."},
+  {r:"ᛗ",n:"Mannaz",k:"Human, Self, Collective Mind",u:"The rune of humanity — your place in the web of all people. Cast for self-knowledge, community magic, and spells that benefit the collective.",rev:"Isolation, arrogance, disconnection from your kind."},
+  {r:"ᛚ",n:"Laguz",k:"Water, Flow, Intuition",u:"The rune of the witch's deepest gift: intuition that flows without effort. Cast Laguz to open psychic channels, deepen dream work, and allow emotional truth to surface.",rev:"Blocked intuition. Stagnant emotions. Fear of the depths."},
+  {r:"ᛜ",n:"Ingwaz",k:"Ing, Gestation, Potential",u:"The seed sleeping inside the earth. Inner work, sacred gestation, the power that needs no outward expression yet. Cast at new moons to amplify intention-seeding.",rev:"No reversal. What is inside will emerge in its time."},
+  {r:"ᛞ",n:"Dagaz",k:"Day, Breakthrough, Dawn",u:"The moment of dawn — the threshold between dark and light. Breakthrough, clarity, transformation from one state to another. Cast Dagaz at transitional moments.",rev:"No reversal. Dawn always comes."},
+  {r:"ᛟ",n:"Othala",k:"Ancestral Home, Heritage, Inheritance",u:"The rune of what is inherited — from ancestors, from the land, from your lineage of blood and spirit. Cast at Samhain for ancestor work, and to heal generational patterns.",rev:"Ancestral pain unacknowledged. Examine what you inherited before claiming it."},
+];
+
+function getRune(m, w) {
+  const rune = RUNES[((m * 4 + w) % 24)];
+  return `
+<div class="spell-block">
+  <h4>Elder Futhark — ${rune.n} ${rune.r}</h4>
+  <p><strong>Keywords:</strong> ${rune.k}</p>
+  <p style="margin-top:.5rem"><strong>Upright Teaching:</strong> ${rune.u}</p>
+  <p style="margin-top:.4rem"><strong>Reversed/Merkstave:</strong> ${rune.rev}</p>
+  <div style="text-align:center;font-size:4rem;padding:1rem 0;opacity:.6;letter-spacing:.2em">${rune.r}</div>
+</div>
+<div class="day-body">
+  <p><strong>How to work with this rune:</strong> Draw ${rune.r} on paper and place it under a candle. Trace it on your palm three times while speaking its name aloud: <em>"${rune.n}, I call your energy into my work."</em> Meditate with it for 10 minutes. You may also carve it into a candle, trace it in salt, or etch it onto a stone to carry.</p>
+  <p style="margin-top:.5rem"><strong>Bind-Rune practice:</strong> Combine this week's rune with last week's (${RUNES[Math.max(0,((m*4+w)-1)%24)].r} ${RUNES[Math.max(0,((m*4+w)-1)%24)].n}) by drawing them overlapping. This creates a bind-rune that holds both energies simultaneously — a powerful personal talisman.</p>
+</div>`;
+}
+
+function getSpell(m, w) {
+  const spells = [
+    // Jan
+    [`<div class="spell-block"><h4>New Year Intention Cauldron Spell</h4><p><strong>You need:</strong> A fireproof bowl, gold paper, a black candle, pen, bay leaves (3).</p><ol><li>On the night of the New Year, light the black candle to honor what you release.</li><li>Write everything you are leaving behind in 2025 on a piece of paper. Be specific. Be ruthless.</li><li>Burn it in the bowl. Watch it go. Say: <em>"I release what was. I make room for what is becoming."</em></li><li>On the gold paper, write your three sacred intentions for 2026. Roll it tight, tie with gold thread.</li><li>Write your word-of-the-year on a bay leaf and burn it — its smoke carries your word to the universe.</li></ol></div><div class="incant">"By smoke and ash and winter's cold,<br>what no longer serves, I now let go.<br>What I call in, let roots grow deep —<br>this seed I plant, this oath I keep."</div>`,
+    `<div class="spell-block"><h4>Wolf Moon Abundance Spell</h4><p><strong>You need:</strong> A howl at the moon (or a fierce, silent call), green aventurine, a white candle, cinnamon stick.</p><ol><li>On the full Wolf Moon (Jan 3), stand outside or at an open window.</li><li>Light the white candle and place the aventurine beside it.</li><li>Snap the cinnamon stick in two — old abundance broken open for the new.</li><li>Speak aloud three things you are ready to receive in 2026. Be specific and bold.</li><li>Let the candle burn completely. Sleep with the aventurine under your pillow.</li></ol></div>`,
+    `<div class="spell-block"><h4>New Moon Dark Seed Spell</h4><p><strong>You need:</strong> A seed packet (or a single dried bean), a small pot of soil, a piece of paper, black ink.</p><ol><li>On the New Moon (Jan 18), write your core intention for this lunar cycle on the paper.</li><li>Fold the paper small and bury it in the soil. Plant the seed on top.</li><li>Say: <em>"In darkness, beneath seeing, beneath knowing — I plant what I wish to grow."</em></li><li>Water with water charged under the previous full moon if possible.</li><li>Tend the plant through the lunar cycle; as it grows, so grows your intention.</li></ol></div>`,
+    `<div class="spell-block"><h4>Ancestor Protection Candle</h4><p><strong>You need:</strong> A white candle, rosemary oil, a photo or name of an ancestor you feel connected to, salt.</p><ol><li>Anoint the candle with rosemary oil from base to tip (drawing protection toward you).</li><li>Draw a circle of salt around the candle.</li><li>Place the ancestor's photo or name within the circle.</li><li>Light the candle and call the ancestor by name: <em>"[Name], I honor you. I ask your protection over this home and this year."</em></li><li>Let burn completely. Keep the salt circle on your altar through the month.</li></ol></div>`,
+    // Feb
+    `<div class="spell-block"><h4>Brigid's Flame of Inspiration Spell</h4><p><strong>You need:</strong> 3 candles (white, red, orange), a quill or pen, paper, rosemary.</p><ol><li>On Imbolc or the nearest evening, set three candles representing Brigid's triple aspect: healing (white), poetry (red), smithcraft (orange).</li><li>Light all three from a single match — one flame, three expressions.</li><li>Write three things you wish to create this year: something that heals, something that speaks, something that builds.</li><li>Tie the paper with a red cord and place before the flames until they burn out.</li><li>Keep the cord on your altar until your first intention manifests.</li></ol></div><div class="incant">"Brigid, bright arrow through winter's cold,<br>kindle in me what I am bold enough to hold.<br>Word and flame and healing hand —<br>let my sacred work now stand."</div>`,
+    `<div class="spell-block"><h4>Snow Moon Self-Love Bath Ritual</h4><p><strong>You need:</strong> Bath or basin, rose petals (fresh or dried), sea salt, a few drops rose oil, pink candle, honey.</p><ol><li>Draw a bath. Add a cup of sea salt, rose petals, and rose oil.</li><li>Light the pink candle beside the tub.</li><li>Stir a teaspoon of honey into the water saying: <em>"I sweeten myself to myself."</em></li><li>Enter the bath slowly. Speak aloud, without irony, five things you genuinely like about yourself.</li><li>Soak for at least 20 minutes. Visualize the water drawing out self-criticism and pouring in warmth.</li></ol></div>`,
+    `<div class="spell-block"><h4>Solar Eclipse Reinvention Spell</h4><p><strong>You need:</strong> A mirror, black cloth, a new candle in a color representing who you are becoming.</p><ol><li>On the partial solar eclipse (Feb 17), cover all mirrors in your space with black cloth.</li><li>Sit in near-darkness with your single new candle unlit before you.</li><li>Spend 10 minutes in total silence. Ask: <em>"Who am I beyond what I was taught to be?"</em></li><li>Light the new candle. Speak the name of who you are becoming — even if you don't fully believe it yet.</li><li>Remove the cloths and look in the mirror. Say: <em>"I see you. I choose you."</em></li></ol></div>`,
+    `<div class="spell-block"><h4>Cord-Cutting Ritual for Imbolc</h4><p><strong>You need:</strong> Two lengths of cord tied together, scissors or athame, black and white candles, sage or rosemary.</p><ol><li>Write on one end of the cord: what or who you are releasing.</li><li>Write on the other end: yourself.</li><li>Light black candle (release) and white candle (new beginning).</li><li>Pass the cord through the smoke of sage. Say: <em>"I honor what this was. I release what it became."</em></li><li>Cut the cord. Burn the release end in the black candle flame. Keep your end on the altar.</li></ol></div>`,
+    // Mar
+    `<div class="spell-block"><h4>Blood Eclipse Shadow Revelation Ritual</h4><p><strong>You need:</strong> A dark bowl of water, a black candle, your journal, courage.</p><ol><li>On the Total Lunar Eclipse (Mar 3), fill a dark bowl with water and set it outside or on a windowsill.</li><li>Light the black candle behind it so it reflects on the water's surface.</li><li>Gaze into the dark water. Ask: <em>"Show me what I cannot see about myself."</em></li><li>Write down everything that arises — images, feelings, words, memories — without judgment.</li><li>End by saying: <em>"I see you. I claim you. You are mine to transform."</em> Salt-cleanse the water before discarding.</li></ol></div><div class="incant">"Blood moon, red oracle, shadow made light —<br>show me my depths on this most sacred night.<br>I do not flinch from what lives below.<br>In claiming my darkness, I learn how to grow."</div>`,
+    `<div class="spell-block"><h4>Ostara Egg Magic</h4><p><strong>You need:</strong> 3 raw eggs, natural dyes (onion skins = gold, red cabbage = blue, turmeric = yellow), a marker.</p><ol><li>On Ostara (Mar 20), write one intention on each raw egg in pencil: one for body, one for spirit, one for life circumstances.</li><li>Dye each egg a color matching its intention (gold for abundance, blue for peace, etc.).</li><li>When dry, place them on your spring altar.</li><li>On the following new moon, bury the eggs in the earth to compost into the ground.</li><li>Your intention is now literally planted in the earth's body.</li></ol></div>`,
+    `<div class="spell-block"><h4>Spring Equinox Balance Spell</h4><p><strong>You need:</strong> Two white candles of equal size, a scale or balance image, paper.</p><ol><li>Light both candles simultaneously on the equinox.</li><li>On one paper write "What I hold." On the other: "What I release." Be honest.</li><li>Read both papers aloud. Let both burn equally.</li><li>Meditate on perfect balance — not stasis, but dynamic equilibrium. Say: <em>"I stand in my own center."</em></li></ol></div>`,
+    `<div class="spell-block"><h4>New Moon Seed-Setting Spell</h4><p><strong>You need:</strong> A packet of seeds (marigold, sunflower, or herb), paper and pen, a small pot of earth.</p><ol><li>On the New Moon in Aries (Mar 19), write your boldest intention on the paper.</li><li>Fold and bury it in the pot. Plant the seeds on top.</li><li>Say: <em>"Bold as the ram, patient as earth — I plant what I claim deserves to be born."</em></li></ol></div>`,
+  ];
+  // Extended content for remaining months
+  const baseSpells = [
+    `<div class="spell-block"><h4>Pink Moon Beauty & Love Magic</h4><p><strong>You need:</strong> Rose water, a mirror, pink candle, rose quartz.</p><ol><li>On the Full Pink Moon (Apr 1), cleanse your mirror with rose water.</li><li>Light the pink candle and hold the rose quartz against your heart.</li><li>Look into the mirror and speak three genuine compliments to yourself.</li><li>Say: <em>"I am worthy of love as I am. Love finds me because I am love."</em></li><li>Place the quartz on your windowsill overnight in the moonlight.</li></ol></div>`,
+    `<div class="spell-block"><h4>Beltane Fire Desire Spell</h4><p><strong>You need:</strong> Red paper, your most passionate desire written boldly, a fire or red candle.</p><ol><li>On Beltane eve (Apr 30), write your heart's deepest desire on red paper.</li><li>Fold it toward you three times.</li><li>Pass it through a candle flame or bonfire three times saying: <em>"As above, so below. As within, so without. This desire is sacred and real."</em></li><li>Burn it completely — the smoke carries it to the universe.</li></ol></div>`,
+    `<div class="spell-block"><h4>Beltane + Flower Moon Supercharged Manifestation</h4><p><strong>You need:</strong> Gold paper, a pen with red ink, may flowers (hawthorn, lilac, or any spring bloom).</p><ol><li>On May 1 — the Beltane Full Moon — write your manifestation in red ink on gold paper.</li><li>Surround the paper with a ring of flowers.</li><li>Light a green and red candle at either side.</li><li>Say: <em>"On this the most potent night of the year, I call my sacred desire into form. The fire burns, the moon is full, the veil is thin — and I am ready."</em></li><li>Leave overnight in full moonlight. Keep on your altar for the full lunar cycle.</li></ol></div><div class="incant">"Beltane fires and the Flower Moon's grace —<br>what I have dreamed now takes its place.<br>God and Goddess, root and flame —<br>I call my desire by its true name."</div>`,
+    `<div class="spell-block"><h4>Litha Sun Water Charging</h4><p><strong>You need:</strong> A glass jar with lid, spring water, herbs (chamomile, calendula, sunflower petals).</p><ol><li>On the Summer Solstice (Jun 20), fill the jar with spring water and add the herbs.</li><li>Place in direct sunlight at noon — the peak of the sun's power.</li><li>Leave for 3–4 hours. Cap and bring inside at sunset.</li><li>Use this sun water to anoint candles, your forehead, or spell materials throughout the season.</li></ol></div>`,
+    `<div class="spell-block"><h4>Buck Moon Achievement Spell</h4><p><strong>You need:</strong> A gold candle, patchouli oil, your resume or a symbol of your goal.</p><ol><li>Anoint the gold candle with patchouli, drawing the oil upward (toward achievement).</li><li>Place your goal symbol beneath the candle.</li><li>Light it and say: <em>"I claim what I have earned. My effort is real, my reward is real. I am equal to my own ambition."</em></li></ol></div>`,
+    `<div class="spell-block"><h4>Lammas Gratitude Bread Spell</h4><p><strong>You need:</strong> Any homemade or store-bought bread, rosemary, salt, gratitude.</p><ol><li>Bake or buy a loaf on Lughnasadh (Aug 1).</li><li>Before eating, hold the bread and speak aloud everything you have harvested this year — every achievement, lesson, relationship, and grace.</li><li>Tear the first piece and leave it outside as an offering. Say: <em>"To the earth that fed my roots — thank you."</em></li><li>Eat the rest in celebration. Share it if possible.</li></ol></div>`,
+    `<div class="spell-block"><h4>Mabon Apple Magic</h4><p><strong>You need:</strong> An apple, a knife, a bowl of water.</p><ol><li>On Mabon (Sep 22), cut the apple horizontally to reveal the pentagram star at its core.</li><li>Hold the halves and ask: "What am I grateful for? What must I release?"</li><li>Speak your gratitude to one half. Speak your release to the other half.</li><li>Bury the "release" half in the earth. Eat the "gratitude" half as a sacrament.</li></ol></div>`,
+    `<div class="spell-block"><h4>Samhain Ancestor Candle Spell</h4><p><strong>You need:</strong> One candle per ancestor you wish to honor, their name or photo, a glass of water, bread.</p><ol><li>On Oct 31 at dusk, set your ancestor altar with photos, names, a glass of water (for the thirsty dead), and bread.</li><li>Light one candle per ancestor, speaking each name as you do.</li><li>Say: <em>"[Name], I remember you. You live in my blood and in my choosing. Speak to me tonight — I am listening."</em></li><li>Sit in silence for 10 minutes. Write whatever arises in your journal.</li><li>Leave the candles to burn safely through the night.</li></ol></div><div class="incant">"The veil is thin, the door is wide —<br>I call my people to my side.<br>Not in fear, but in love and knowing —<br>we are connected, coming and going."</div>`,
+    `<div class="spell-block"><h4>Beaver Moon Home Protection Spell</h4><p><strong>You need:</strong> Black tourmaline (or obsidian), salt, protective herbs (bay, rosemary, clove), a black candle.</p><ol><li>Walk the perimeter of your home clockwise, sprinkling salt at each threshold and corner.</li><li>At each window and door, draw an invisible protective rune (Algiz ᛉ) with your finger.</li><li>Light the black candle at your front door or altar.</li><li>Say: <em>"This home is sealed. Only love and healing enter here. All harm is turned away."</em></li><li>Place the black tourmaline at your front door permanently.</li></ol></div>`,
+    `<div class="spell-block"><h4>Yule Log Spell for the New Year</h4><p><strong>You need:</strong> A large candle (to serve as your Yule log), holly, ivy, dried orange peel, a ribbon.</p><ol><li>Dress your candle with holly sprigs and wrap ivy around its base.</li><li>Anoint with pine or frankincense oil.</li><li>On the longest night (Dec 21), light the candle at dusk.</li><li>As it burns, write your three wishes for the new solar year. Read them aloud as an incantation.</li><li>Keep the candle burning as long as safely possible. Save a small stub to light next year's Yule candle — thus connecting the years in one unbroken flame.</li></ol></div><div class="incant">"Darkness has reached its deepest hour,<br>and in that depth is born new power.<br>From this night the sun returns —<br>and in me too, a new flame burns."</div>`,
+  ];
+
+  const allSpells = [...spells, ...baseSpells];
+  const idx = (m * 4 + w) % allSpells.length;
+  return allSpells[idx];
+}
+
+function getLunar(m, w) {
+  const meta = MONTH_META[m];
+  const phases = ["Waning — Release & Banish", "New Moon — Plant Seeds", "Waxing — Build & Attract", "Full Moon — Amplify & Celebrate"];
+  const phaseTeachings = [
+    `<p>The <strong>waning moon</strong> asks: what is ready to die? This is not a time of passivity — it is active release. Work with banishing spells, cord-cutting, smoke-cleansing, and journaling what you are genuinely done with. The waning moon is the Crone's domain — she who cuts the thread of what has run its course.</p><p style="margin-top:.5rem"><strong>This month's waning work:</strong> ${meta.waning}.</p><div class="spell-block"><h4>Waning Moon Banishing Ritual</h4><ol><li>Write what you banish on black paper.</li><li>Light a black candle. Burn the paper in the flame.</li><li>Say: <em>"By waning light I release what binds — let it transform in the dark."</em></li><li>Scatter the ashes at a crossroads or flush them away.</li></ol></div>`,
+    `<p>The <strong>new moon</strong> is the void that holds everything. This is the most potent time for intention-setting. Write your intentions in silver or gold ink. Place them beneath a crystal on your altar. Speak them to the dark sky. The new moon does not require visible light — it requires your faith that what you plant in darkness will grow.</p><p style="margin-top:.5rem"><strong>This month's seed work:</strong> ${meta.waxing}.</p><div class="spell-block"><h4>New Moon Intention Ritual</h4><ol><li>Sit in candlelight. Ground yourself.</li><li>Write 3 intentions beginning with "I am" or "I have."</li><li>Fold toward you. Place under a moonstone or clear quartz.</li><li>Say: <em>"In the dark, the seed knows what it will become."</em></li></ol></div>`,
+    `<p>The <strong>waxing moon</strong> is your momentum. As the light builds night by night, pour your energy into what you are calling in. This is the time for action, for growth spells, for showing up to the opportunities you planted at the new moon. The universe is leaning toward yes right now — meet it halfway.</p><p style="margin-top:.5rem"><strong>This month's building energy:</strong> ${meta.waxing}.</p><div class="spell-block"><h4>Waxing Moon Drawing Ritual</h4><ol><li>Anoint a candle in the color of your goal with oil, drawing upward.</li><li>Light it. Visualize what you are calling in as already present.</li><li>Say: <em>"As the moon grows, so grows what I call. I am already receiving."</em></li></ol></div>`,
+    `<p>The <strong>full moon</strong> amplifies everything — magic, emotion, intuition, and truth. What you have been building or suppressing will surface under her light. Work with this rather than against it. Charge your tools. Do your most powerful spell work. And simply receive — sometimes the most potent full moon practice is stepping outside and letting her wash over you.</p><p style="margin-top:.5rem"><strong>This month's full moon:</strong> ${meta.lunarTheme}.</p><div class="spell-block"><h4>Full Moon Charging & Gratitude Ritual</h4><ol><li>Place all crystals, tools, and water jars on the windowsill.</li><li>Write 10 things you are genuinely grateful for.</li><li>Stand in moonlight (or visualize it flooding the room).</li><li>Say: <em>"I am full. I am grateful. I receive the moon's blessing in my bones."</em></li></ol></div>`,
+  ];
+  return `<div class="day-body"><h4 style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.78rem;letter-spacing:.08em;color:var(--gold-pale);margin-bottom:.6rem">${phases[w % 4]}</h4>${phaseTeachings[w % 4]}</div>`;
+}
+
+function getHerb(m, w) {
+  const herbs = [
+    {name:"Mugwort (Artemisia vulgaris)",uses:"Prophetic dreams, psychic enhancement, scrying, moon magic. The witch's herb.",prep:"Burn as incense before divination. Sleep with a sachet under your pillow for vivid dreams. Brew as a very mild tea (not for pregnant people). Smoke-cleanse your tools.",magic:"Ruled by the moon and Venus. Sacred to Artemis and Hecate. Rub fresh leaves on your scrying mirror before use.",caution:"Not for pregnancy. Use smoke rather than tea for beginners."},
+    {name:"Rosemary (Rosmarinus officinalis)",uses:"Protection, purification, memory, ancestral connection, love. The most versatile witch's herb.",prep:"Burn as incense for space clearing. Add to protection sachets. Use in cooking as a magical act. Hang bundles above doorways.",magic:"Stands in for any herb in a pinch — rosemary is the great all-purpose plant. 'Where rosemary grows, the woman rules the house.'",caution:"Generally very safe. High quantities internally not recommended."},
+    {name:"Lavender (Lavandula angustifolia)",uses:"Peace, sleep, healing, love, purification. The gentlest cleansing herb.",prep:"Sachets under pillows for sleep. Bath infusions. Incense for calm. Added to love spells for lasting, gentle love.",magic:"Ruled by Mercury and the air element. Creates a serene magical atmosphere. Excellent for beginners.",caution:"Very safe. Essential oil should be diluted."},
+    {name:"Bay Laurel (Laurus nobilis)",uses:"Wishes, victory, protection, prophecy. Bay leaves carry wishes to the universe.",prep:"Write intentions on bay leaves and burn them. Add to protection sachets. Place under pillow for prophetic dreams.",magic:"Sacred to Apollo and the sun. A bay leaf burned at new moon carries your wish. Three bay leaves on an altar amplify spell power.",caution:"Safe externally. Bay essential oil requires dilution."},
+    {name:"Sage (Salvia officinalis)",uses:"Purification, wisdom, protection, longevity. The most widely known cleansing herb.",prep:"Burn as a bundle for space clearing. Make into a tea for clarity. Add to wisdom spells.",magic:"Ruled by Jupiter. Creates space for clear thinking and divine communication. Use at the start of any ritual.",caution:"Ethical note: White sage is sacred to Indigenous traditions — consider garden sage as an alternative."},
+    {name:"Yarrow (Achillea millefolium)",uses:"Courage, love, divination, healing wounds (physical and emotional). Achilles's herb.",prep:"Carry for courage before difficult conversations. Add to love divination. Use in wound-healing poultices.",magic:"Ruled by Venus. Called 'Woundwort' — it heals what has been cut. A powerful protective herb during emotional vulnerability.",caution:"May cause skin sensitivity. Avoid during pregnancy."},
+    {name:"Chamomile (Matricaria chamomilla)",uses:"Money, luck, purification, calm, sleep. The sun's gentle child.",prep:"Brew as calming tea before spells. Sprinkle around the home for luck. Add to prosperity spells.",magic:"Ruled by the sun. A gentle amplifier — adds luck and warmth to any spell. Bathe in chamomile tea before important magic.",caution:"Allergy risk for those sensitive to ragweed."},
+    {name:"Patchouli (Pogostemon cablin)",uses:"Money, prosperity, love, grounding, earth magic.",prep:"Oil for anointing candles. Incense for grounding rituals. Add to prosperity sachets.",magic:"Ruled by Saturn and Earth. A deeply grounding, earthy fragrance that anchors spell work and calls in material abundance.",caution:"Very potent — a little goes a long way."},
+    {name:"Wormwood (Artemisia absinthium)",uses:"Psychic development, spirit communication, prophecy, hex-breaking.",prep:"Burn as incense during Samhain and spirit communication rituals. Place in scrying sachets.",magic:"Sacred to the dead and to Hecate. One of the most powerful herbs for crossing the veil. Use with intention and respect.",caution:"Toxic if ingested. For external/incense use only. Keep away from children."},
+    {name:"Elder (Sambucus nigra)",uses:"Protection, healing, banishing, fairy magic, ancestor connection.",prep:"Hang elder berries for protection. Elder flowers make a healing tea. Never burn elder wood indoors (traditionally bad luck).",magic:"The Elder Mother spirit lives in elder trees. Ask permission before taking any part of the plant. One of the most potent fairy trees.",caution:"Raw elder berries are toxic — always cook before consuming. Ask the Elder Mother's permission."},
+    {name:"Hawthorn (Crataegus)",uses:"Protection, fairy magic, heart healing, Beltane, liminal threshold work.",prep:"Bring flowers indoors only at Beltane (traditionally bad luck otherwise). Carry berries for heart protection. Plant at thresholds.",magic:"Sacred to the fairy world. The hawthorn is a liminal tree — it marks the boundary between worlds. Plant at your gate for powerful protection.",caution:"Thorns are sharp. Berries can cause digestive upset in quantity."},
+    {name:"Frankincense (Boswellia sacra)",uses:"Purification, consecration, spirituality, Sun magic, prayer.",prep:"Burn as resin incense before any ritual. Anoint candles with the oil for sacred work.",magic:"One of the most sacred resins across nearly every tradition on earth. Raises the spiritual vibration of any space immediately.",caution:"Generally very safe. Resin burns require a charcoal disc."},
+  ];
+  const h = herbs[(m * 4 + w) % herbs.length];
+  return `<div class="spell-block"><h4>Herb of the Week: ${h.name}</h4><p><strong>Magical Uses:</strong> ${h.uses}</p><p style="margin-top:.4rem"><strong>Preparation:</strong> ${h.prep}</p><p style="margin-top:.4rem"><strong>Magical Lore:</strong> ${h.magic}</p><p style="margin-top:.4rem"><strong>Caution:</strong> ${h.caution}</p></div><div class="day-body"><p><strong>This week's herbalism practice:</strong> Spend time with this plant. If you can source it, hold it and breathe its scent before using it magically. Read about its folklore. Grow even a small pot of it if possible. The most powerful herbal magic comes from <em>relationship</em> with the plant — not just its chemical constituents.</p><p style="margin-top:.5rem"><strong>Spell Jar using this herb:</strong> Layer this herb with salt (protection), the herb itself, a crystal aligned with its purpose, and a written intention inside a small jar. Seal with wax. Keep on your altar or carry with you.</p></div>`;
+}
+
+function getTarot(m, w) {
+  const cards = [
+    {c:"The Fool",g:"🌀",teach:"Every month of January is a Fool's moment — you stand at the new year's edge about to leap. The Fool does not leap from stupidity but from holy trust. Pull this card and ask: where am I being called to begin without knowing the outcome?",read:"If this card appears: a genuinely new beginning is available. The Universe is giving you permission to start fresh. Take the leap."},
+    {c:"The High Priestess",g:"🌙",teach:"February deepens. Imbolc asks you to go inward before emerging. The High Priestess guards the veil — she doesn't speak, she shows. When she appears in your spread, stop analyzing. Feel instead.",read:"If reversed: you are overriding intuition with logic. Sit in stillness for 5 minutes before making the decision you're circling."},
+    {c:"Death",g:"🥀",teach:"The eclipse month. Death in tarot is never literal — it is the most profound transformation available. Something must end so completely that the new can truly be new. Resistance makes this harder. Surrender makes it sacred.",read:"If this card appears: stop asking how to fix the situation. Ask what it needs to transform into."},
+    {c:"The Lovers",g:"♾️",teach:"April and Beltane approaching — the Lovers is not just romance. It is a sacred CHOICE that aligns with your deepest values. Every time you choose love over fear, you live this card. What choice before you requires your whole heart?",read:"The card asks: which path truly represents who you are, not who others need you to be?"},
+    {c:"The Empress",g:"🌿",teach:"Beltane's Goddess energy made card. The Empress is the earth itself — fecund, abundant, sensual, creative. She reminds you that you are a body, and bodies deserve to be nourished, beautiful, and pleasured. This month: tend your physical being as an act of magic.",read:"If reversed: creative block or neglecting the body. When did you last do something purely pleasurable?"},
+    {c:"The Sun",g:"☀️",teach:"Litha's card — the sun at its peak. This is one of the most unambiguously joyful cards in the deck. Don't intellectualize the Sun. Simply receive its warmth. Joy is not naive. Vitality is not excess. Your light is needed.",read:"If this card appears: stop working so hard and let something be easy. Success is available. Receive it."},
+    {c:"Strength",g:"🦁",teach:"Midsummer deepens. Strength shows a woman taming a lion with bare hands — not through force, but through love, patience, and unshakeable inner knowing. The most powerful magic is quiet and certain. Where are you being called to lead with gentleness rather than force?",read:"If reversed: raw, uncontrolled emotion or power. What needs the touch of your gentleness right now?"},
+    {c:"The Wheel of Fortune",g:"☸️",teach:"Lughnasadh — the first harvest — is the Wheel itself. Life moves in cycles; you are always turning. When the Wheel appears, align with the cycle rather than fighting it. What season are you in? Work WITH that energy.",read:"A turning point. Something is shifting. Trust the turn."},
+    {c:"Justice",g:"⚖️",teach:"Mabon: day and night balanced. Justice in tarot is not punishment — it is alignment. You will receive exactly what you have given. The scales never lie. Before you cast a spell to change a situation, ask honestly: what is my role in creating it?",read:"If this card appears in a question about fairness: the truth is probably somewhere in the middle."},
+    {c:"The Moon",g:"🌕",teach:"October, approaching Samhain. The Moon illuminates the path with shifting light and long shadows. What appears as reality may be illusion; what appears as illusion may be more real. This is the card of the deep unconscious, dreams, and fears. Don't act yet — observe.",read:"If reversed: a truth is beginning to surface from beneath the confusion. Let it come."},
+    {c:"The Hermit",g:"🕯️",teach:"November is the Hermit's month — the long dark calls us inward. The Hermit does not withdraw from loneliness; he withdraws from a need for truth. Carry your own lamp. What you seek cannot be found in the noise.",read:"If this card appears: the answer you're looking for is inside you. Spend time alone."},
+    {c:"The World",g:"🌍",teach:"December — the year completes. The World is the last major card before the Fool leaps again. Something significant is complete. Celebrate it fully before the next beginning. You have earned this completion. Inhabit it.",read:"If reversed: incompletion. Is there something from this year that needs formal ending before you can truly begin?"},
+  ];
+  const c = cards[m];
+  return `<div class="spell-block"><h4>${c.g} ${c.c} — Card of the Month</h4><p>${c.teach}</p></div><div class="day-body"><p><strong>Reading guidance:</strong> ${c.read}</p><p style="margin-top:.6rem"><strong>Weekly practice:</strong> Pull your deck and find this card. Lay it on your altar this week. Each morning, spend two minutes looking at it before checking your phone. Notice what it stirs. Journal any dreams or encounters that feel related to its energy.</p><p style="margin-top:.5rem"><strong>Spread for the week</strong> — pull three cards asking: <em>"How is ${c.c}'s energy moving through my life right now?"</em> Card 1: Where I resist it. Card 2: Where I embody it. Card 3: What it is teaching me.</p></div>`;
+}
+
+function getAltar(m, w) {
+  const altars = [
+    "Set a <strong>winter altar</strong> using the colors white and silver. Include: a bowl of snow or ice (renewal), a black candle (the void before creation), bare branches (the tree waiting), and a written list of your 2026 intentions rolled and tied with gold thread. Charge everything under the Wolf Moon.",
+    "For <strong>Imbolc altar</strong>: Place a Brigid's cross at center. Add a white or red candle for her triple flame. Include snowdrops or early spring flowers if available. A small cauldron with water. Seeds in a dish. A piece of writing you are working on, dedicated to Brigid's poetry aspect.",
+    "The <strong>Eclipse altar</strong>: Cover your altar cloth in black. Place a dark bowl of water in the center for scrying. Add obsidian, black tourmaline, and jet. Your shadow work journal. A single red candle for the blood moon. Nothing pleasant or decorative — this is a working altar for depth.",
+    "A <strong>Spring Love altar</strong>: Rose quartz at center. Pink and green candles. Fresh flowers — whatever is blooming. A small mirror for self-love work. Rose water in a bowl. A love letter written to yourself or to what you are calling in.",
+    "The <strong>Beltane fire altar</strong>: Red and green altar cloth. Hawthorn flowers if available. Two red candles representing the God and Goddess. A wand. Your most passionate desire written on red paper. A small cauldron with a tea light inside representing the bonfire.",
+    "A <strong>Litha sun altar</strong>: Yellow and gold cloth. A large gold or yellow candle at center. Sunflowers or chamomile. Citrine and carnelian. Sun water in a clear bowl reflecting light. A mirror angled to catch sunlight. Herbs gathered at noon.",
+    "The <strong>midsummer peak altar</strong>: Oak leaves and acorns (symbolic of strength). A lion figure or image. A gold candle. Red jasper or tigers eye. A list of your accomplished goals this year — honor the harvest of your efforts.",
+    "A <strong>Lammas harvest altar</strong>: Wheat stalks, sunflowers, dried corn. A loaf of bread (the first harvest). Amber and golden topaz. Brown and gold candles. A corn dolly. A bowl of fruit. Your gratitude list for 2026's bounty so far.",
+    "The <strong>Mabon balance altar</strong>: Apples, pomegranates, acorns, and fallen leaves. Two equal candles in orange and deep purple. Scales (even a drawing). A gratitude journal. Things you are releasing written on leaves — to be burned or buried.",
+    "A <strong>Samhain ancestor altar</strong>: Photos and mementos of the beloved dead. A glass of water for the thirsty spirits. Marigolds (flowers of the dead). Black and orange candles. A small plate of food shared with the dead. Your divination tools.",
+    "A <strong>late autumn altar</strong>: Deep burgundy cloth. Pine cones, dried herbs, and roots. Black and deep purple candles. Labradorite for seeing in the dark. Ancestor photos. A bowl of salt for protection. Warm, quiet, and still.",
+    "The <strong>Yule altar</strong>: Evergreens (holly, ivy, pine, fir). Red and gold candles — one large pillar as the Yule log stand-in. Mistletoe hung above (for peace and love). A Yule log candle. Gold coins for prosperity. A letter to the Sun written and placed on the altar through the longest night.",
+  ];
+  return `<div class="day-body"><p>${altars[m]}</p><div class="spell-block"><h4>Altar Tending Practice</h4><p>Your altar is a living magical space — not a display. Tend it as you would a relationship. Speak to it when you pass. Rearrange when energy stagnates. Add things that feel right without overthinking. Remove what feels dead or finished. Light a candle on it daily — even for 5 minutes. Notice what is drawn to it. The altar will teach you what it needs.</p></div></div>`;
+}
+
+function getAstro(m, w) {
+  const astro = [
+    "Saturn and Neptune are conjunct in Aries this year — a rare once-in-30-year configuration that brings spiritual discipline into collective focus. January's sky holds this energy in its early stages: structures are beginning to dissolve so more genuine ones can form.",
+    "The partial solar eclipse on Feb 17 occurs in Aquarius, challenging old identity structures and inviting radical reinvention. This eclipse's nodes point to: what collective future are you willing to help build?",
+    "The total lunar eclipse in Virgo on March 3 is the most significant astronomical event of 2026. Virgo eclipses call us to examine what we call service versus self-sacrifice. Health, daily practice, and the stories we tell about being 'useful' are all up for reexamination.",
+    "Venus moves into Taurus in April, its home sign — love, beauty, sensuality, and abundance all deepen. This is one of the most favorable times of the year for love spells, financial magic, and anything connected to the body's pleasures.",
+    "Mars conjuncts Jupiter in Leo in late April through Beltane — an explosive combination of courage and expansion. Use this energy: it wants to burst forward. Big actions taken near Beltane have the wind of the cosmos behind them.",
+    "Litha falls while the Sun is in Cancer — an unusual softening of the solstice energy. This Litha has a quality of emotional depth beneath the solar fire. Honor the Mother within the light.",
+    "Jupiter in Leo through summer expands everything Leo touches — creativity, performance, the desire to be seen and known. If you have Leo in your chart, this is your year of expansion. For everyone: what creative work deserves your biggest energy?",
+    "Lammas arrives with Mars in Gemini — an unusual energy for the harvest season. The cutting may be mental as much as physical. What stories are you finally ready to stop telling about yourself?",
+    "Mabon and the equinox coincide this year with Venus stationing retrograde — a call to revisit what and whom we value. What relationships need honest reassessment? What beauty have you neglected?",
+    "Pluto in Aquarius continues its 20-year transit — the collective dismantling of hierarchical power structures. Samhain 2026 falls with this energy fully activated: the old is dying. Help it die with intention.",
+    "Saturn in Pisces asks: what spiritual discipline actually serves you? The Beaver Moon in Taurus grounds this question in the body. What physical practice makes you feel most alive?",
+    "Yule falls with the Sun conjunct Galactic Center — a rare celestial alignment that opens a channel to deep cosmic knowing. This is one of the most spiritually charged Yule celebrations in decades. Meditate with full presence on the longest night.",
+  ];
+  return `<div class="day-body"><p>${astro[m]}</p><div class="spell-block"><h4>Planetary Hour Magic</h4><p>Each day of the week is governed by a planet, and each hour of the day rotates through the seven classical planets. Timing your spells to the planetary hour and day deepens their resonance:</p><ul><li><strong>Sunday (Sun):</strong> Vitality, success, confidence, solar magic</li><li><strong>Monday (Moon):</strong> Dreams, intuition, water, psychic work</li><li><strong>Tuesday (Mars):</strong> Courage, protection, banishing, action</li><li><strong>Wednesday (Mercury):</strong> Communication, travel, learning, tricks</li><li><strong>Thursday (Jupiter):</strong> Abundance, expansion, luck, law</li><li><strong>Friday (Venus):</strong> Love, beauty, art, harmony, relationships</li><li><strong>Saturday (Saturn):</strong> Discipline, banishing, endings, structure</li></ul></div></div>`;
+}
+
+function getPoetry(m, w) {
+  const poems = [
+    `<div class="incant">"In the deep January,<br>when the wolf walks through my dreaming —<br>I learn the shape of wanting<br>that has no season and no name.<br><br>What sleeps beneath snow<br>is not dead.<br>It is only waiting<br>to be called by its right name<br>come spring."</div>`,
+    `<div class="incant">"Brigid, your torch is smaller<br>than I expected.<br>One flame, honest and red,<br>against the whole February dark.<br><br>But this is how fire works —<br>not all at once,<br>but one small brave light<br>that does not yield."</div>`,
+    `<div class="incant">"Blood moon, you old teacher,<br>you show us what we buried<br>in ourselves and called it<br>gone.<br><br>Nothing is ever gone.<br>Only changed address.<br>Shadow work is finding<br>where you moved to."</div>`,
+    `<div class="incant">"April is the month<br>everything wants something.<br>The tulip wants light.<br>The bee wants sweetness.<br>I want what I've been too careful to say —<br><br>so I say it now<br>to the pink moon:<br>I am ready. I am ready.<br>I am finally ready."</div>`,
+    `<div class="incant">"Beltane, you season of fire —<br>I have been afraid of my own wanting<br>long enough.<br><br>The God and Goddess<br>did not ask permission<br>to love the world into bloom.<br><br>Neither will I."</div>`,
+    `<div class="incant">"At the peak of your power,<br>the sun teaches:<br>radiance is not arrogance.<br>Light is not unkind.<br><br>Stand in your full self<br>and let the shadow<br>fall where it must —<br>you cannot help that.<br>You can only keep<br>being the light."</div>`,
+    `<div class="incant">"August honey drips<br>into everything.<br>The bees know:<br>sweetness is the work,<br>not the reward.<br><br>I am learning<br>to make my life<br>from what is actually here,<br>not what I planned for."</div>`,
+    `<div class="incant">"Lammas prayer:<br>Let me be willing<br>to give what feeds others<br>even when the giving costs.<br><br>Let me be the bread<br>and not just the baker.<br>Let me remember<br>that sacrifice and service<br>are not the same as suffering."</div>`,
+    `<div class="incant">"Mabon equilibrium —<br>for one breath<br>the scales hold.<br><br>I take what I earned<br>in both hands.<br>I set down what is finished<br>with both hands.<br><br>This is what gratitude<br>actually feels like:<br>full and empty<br>at once."</div>`,
+    `<div class="incant">"At Samhain I set a place<br>at the table for everyone<br>I have loved and lost.<br><br>The chair is never empty.<br>The food is always taken.<br>Something fills the glass<br>I pour for the dead.<br><br>This is how I know<br>love does not end<br>at the edge of a body."</div>`,
+    `<div class="incant">"November teaches:<br>the tree is not dead<br>because it has lost its leaves.<br><br>It has simply<br>moved its life<br>underground,<br>where no one can see it<br>working."</div>`,
+    `<div class="incant">"Yule incantation:<br>I will not pretend<br>that the longest night is easy.<br><br>But I know this:<br>every light I kindle<br>against it<br>is an act of faith<br>so old it predates<br>everything I was taught.<br><br>The darkness held.<br>And then it didn't.<br>It never does."</div>`,
+  ];
+  return poems[m] + `<div class="day-body"><p><strong>Your turn:</strong> Write a spell in the form of a poem this week. It doesn't have to rhyme. It only has to be honest. The oldest magic is the spoken word — and your own words, written in your own voice, carry more power than any incantation you read elsewhere. Begin with: <em>"I am the one who..."</em></p></div>`;
+}
+
+function getRitual(m, w) {
+  const rituals = [
+    `<div class="spell-block"><h4>New Year Threshold Ritual</h4><p>Stand at your front door at midnight on Jan 1. Open it wide. Say aloud: <em>"I open my home and my life to all that is good, healing, and true. All harm, all old weight, all that has passed — you may go now."</em> Throw a handful of salt over the threshold (outside). Close the door. You have set the year's energetic tone.</p></div>`,
+    `<div class="spell-block"><h4>Imbolc House Blessing</h4><p>Walk through your home clockwise with a lit candle, pausing in each room to say: <em>"Brigid's light enters here. May this room know warmth, creativity, and healing."</em> Open one window briefly in each room to let winter's staleness out. End at your altar, where you place the candle and let it burn completely.</p></div>`,
+    `<div class="spell-block"><h4>Eclipse Shadow Integration</h4><p>During the Blood Eclipse week: each morning before rising, lie still and ask your subconscious: <em>"What are you carrying that I don't want to look at?"</em> Write the answer without editing for 10 minutes. Don't try to fix it — just see it. At week's end, read all five entries. The pattern that emerges IS the eclipse's teaching for you.</p></div>`,
+    `<div class="spell-block"><h4>Spring Equinox Barefoot Walking</h4><p>On Ostara, walk barefoot on grass or earth (even if briefly) for the first time since winter. As you walk, speak aloud: <em>"I return my feet to the earth. I return my weight to what holds me. I am part of the living world."</em> This is not symbolic — it is literal grounding. Feel the temperature, the texture, the aliveness beneath your feet.</p></div>`,
+    `<div class="spell-block"><h4>Beltane Fire Jumping</h4><p>Even a single lit candle on the floor can serve: leap over it (safely) three times. With each leap, declare one thing you are leaving behind, one thing you are moving toward, and one blessing you call in. The leap is itself the spell — your whole body commits to the crossing.</p></div>`,
+    `<div class="spell-block"><h4>Litha Dawn Greeting</h4><p>Rise before sunrise on the solstice. Go outside or stand at your window. As the sun crests the horizon, raise your arms and say: <em>"I greet you, Sun, at your greatest height. As you turn toward darkness, you teach me that the fullest moment always carries its turning within it. I too am full, and I too will turn — and this is sacred."</em></p></div>`,
+    `<div class="spell-block"><h4>Moon Water Making</h4><p>Leave a sealed glass jar of spring water in direct moonlight overnight. Before placing it, speak your intention into the water. In the morning, bring it inside before the sun rises (to preserve the moon's energy). Use this water to anoint candles, crystals, your forehead, or add to ritual baths. Moon water amplifies any spell it touches.</p></div>`,
+    `<div class="spell-block"><h4>Lammas Bread Offering</h4><p>Bake or buy a loaf of bread. Hold it and name every abundance in your life, however small. Take the bread outside. Tear the first piece and leave it on the earth saying: <em>"Earth, you fed my roots. I give back what I can."</em> Eat the rest in gratitude. Share it with someone you love.</p></div>`,
+    `<div class="spell-block"><h4>Mabon Release Walk</h4><p>Walk in nature and collect fallen leaves — not from trees, only from the ground (already released). Carry them home. Write one thing you are releasing on each leaf. Build a small fire or candle flame and burn them one by one. Say with each: <em>"I release you with gratitude. You served me. Now go."</em></p></div>`,
+    `<div class="spell-block"><h4>Samhain Dumb Supper</h4><p>On Oct 31, prepare a meal in silence. Set one extra place at your table. Place a glass of water and a small portion of food there. Light a candle. Eat your meal entirely in silence, opening your senses to any impressions, feelings, or memories that arise. These are your ancestors visiting. After: speak their names aloud and thank them for coming.</p></div>`,
+    `<div class="spell-block"><h4>Ancestor Altar Building</h4><p>In November, build or expand your ancestor altar. Include: photos of those who have passed, objects they loved, a glass of water (for the thirsty dead), a candle lit in their honor, and any food or drink they loved in life. Tend it daily. Speak to your ancestors as you would to living family — because the relationship does not end with death.</p></div>`,
+    `<div class="spell-block"><h4>Yule Night Vigil</h4><p>On the longest night (Dec 21), light every candle in your home and stay up past midnight. Tell stories, sing, write, create — anything that keeps the spirit's fire alive through the dark. At midnight exactly, light one new candle from the flame of an old one, saying: <em>"The old year feeds the new year's light. I carry what was good forward, and release the rest."</em></p></div>`,
+  ];
+  return rituals[m] + `<div class="day-body"><p><strong>Ritual principle:</strong> A ritual is any act done with full consciousness and intention. The size of the act matters infinitely less than the quality of attention you bring to it. Lighting a candle for 30 seconds with complete presence is a more powerful ritual than an elaborate ceremony performed while distracted.</p></div>`;
+}
+
+function getDivination(m, w) {
+  const div_types = [
+    `<div class="spell-block"><h4>Scrying — Mirror & Water</h4><p>Scrying is one of the oldest forms of divination: gazing into a reflective surface until the rational mind quiets and the intuitive mind speaks through images, symbols, and impressions.</p><p><strong>How to scry:</strong></p><ol><li>Dim all lights. Light one candle behind you so it reflects faintly in the surface.</li><li>Use a black mirror, a bowl of dark water, or a regular mirror at night.</li><li>Relax your gaze — don't stare hard, allow your eyes to go soft.</li><li>Ask your question mentally, then release it. Don't seek — receive.</li><li>What arises may be symbolic images, colors, feelings, or words. Record everything immediately after.</li></ol></div>`,
+    `<div class="spell-block"><h4>Pendulum Divination</h4><p>A pendulum can access your deeper knowing on binary or directional questions.</p><p><strong>How to work with a pendulum:</strong></p><ol><li>Hold the chain lightly. Ask: "Show me yes." Observe the movement (clockwise, back-forth, etc). This is your "yes."</li><li>Ask: "Show me no." Observe. This is your "no."</li><li>Ask only questions you are genuinely open to both answers of — the pendulum reflects your deeper knowing, not your desires.</li><li>For deeper readings, use a chart with multiple options and let the pendulum point.</li></ol><p style="margin-top:.5rem"><strong>Best for:</strong> Locating lost objects, choosing between options, checking energetic alignment.</p></div>`,
+    `<div class="spell-block"><h4>Dream Journaling for Divination</h4><p>Your dreams are one of the most direct channels of information available to you — and most of us throw them away every morning. Begin treating them as oracles.</p><ol><li>Keep a journal and pen by your bed. Before sleeping, say: <em>"I will remember my dreams. They carry information I need."</em></li><li>Upon waking — before anything else — write immediately. Don't get up first. Write even fragments, colors, feelings.</li><li>After a week, look for patterns: recurring symbols, figures, places, emotions. These are your psyche speaking in its own language.</li><li>Use a dream dictionary as a starting point, but your personal symbol associations always take precedence.</li></ol></div>`,
+    `<div class="spell-block"><h4>Tasseography — Tea Leaf Reading</h4><p>The ancient art of reading tea leaves — or coffee grounds.</p><ol><li>Brew loose-leaf tea. Drink it while holding a question lightly in mind.</li><li>When only a small amount of liquid remains, swirl the cup three times counterclockwise.</li><li>Invert the cup onto a saucer. Let drain for one minute.</li><li>Right the cup. Read the leaves: shapes near the handle relate to home and self; shapes near the rim relate to the near future; shapes at the bottom relate to the far future.</li><li>Look for: animals (messengers), letters (initials), shapes, lines (paths), and clusters (complications).</li></ol></div>`,
+  ];
+  return div_types[w % div_types.length] + `<div class="day-body"><p><strong>On all divination:</strong> The tools are not magic. You are. The tarot card, the tea leaf, the pendulum — these are all external structures for your own intuitive knowing to organize itself around. The most important divination practice is the one you develop with regularity. Consistency opens the channel wider than any single dramatic session.</p></div>`;
+}
+
+function getManifest(m, w) {
+  const manifest = [
+    `<div class="spell-block"><h4>Manifestation Method: Scripting</h4><p>Write your desired reality in the past tense, as though it has already happened and you are describing it: "I am so grateful that I finally have..." Use full sensory detail — what you see, feel, smell, the emotions present. Read it aloud each morning for 21 days.</p></div><div class="day-body"><p><strong>The science behind this:</strong> The brain does not easily distinguish between vividly imagined experiences and actual ones. Repeated vivid scripting literally primes your reticular activating system (the brain's relevance filter) to notice opportunities aligned with what you've been describing. You don't conjure things from nothing — you become someone who sees and takes the right actions.</p></div>`,
+    `<div class="spell-block"><h4>Manifestation Method: The 369 Method</h4><p>Write your intention 3 times in the morning, 6 times in the afternoon, and 9 times at night for 33 days. These numbers carry vibrational significance (Tesla's sacred 3-6-9) and the repetition trains the nervous system toward your goal.</p><p><strong>Key:</strong> Write as though it's already happening: "I am..." or "I have..." not "I want..."</p></div>`,
+    `<div class="spell-block"><h4>Manifestation Method: Candle Vigil</h4><p>Choose a candle color aligned with your goal. Each day at the same time, light it for exactly 15 minutes. During those 15 minutes: do nothing but hold your vision clearly and feel the emotion of having it. After 15 minutes, extinguish. Repeat for the full lunar cycle (new moon to full moon for attraction; full moon to new moon for release).</p></div>`,
+    `<div class="spell-block"><h4>Manifestation & the Shadow</h4><p>The deepest truth in manifestation practice: <strong>what we cannot manifest is often what we subconsciously believe we don't deserve.</strong> Before working on any new manifestation goal, spend one week with this journal question: "Why am I afraid of receiving this?" Write without editing. What arises is the actual work — the clearing that makes space for the thing you want to arrive.</p></div>`,
+  ];
+  return manifest[w % manifest.length];
+}
+
+function getShadow(m, w) {
+  const shadow = [
+    `<div class="spell-block"><h4>Introduction to Shadow Work</h4><p>The "shadow" is the Jungian term for the parts of ourselves we have denied, rejected, or been shamed out of expressing. The shadow is not evil — it is simply unconscious. And what is unconscious runs us without our knowledge or consent.</p><p>Shadow work is the practice of consciously going to look at what lives there — so that it no longer controls us from behind the scenes.</p></div><div class="day-body"><p><strong>Shadow journal prompt:</strong> Write about something that makes you intensely judgmental or irritated in others. Describe it in full, vivid detail. Now ask: "Where does this quality live in me?" This is the shadow — it speaks loudest through projection.</p></div>`,
+    `<div class="spell-block"><h4>The Shadow & the Wheel of the Year</h4><p>Each season of the Wheel carries shadow work appropriate to its energy. Samhain is the most obvious — the descent, the death, the reckoning. But all eight Sabbats have a shadow face: Beltane's shadow is possessive desire; Litha's shadow is arrogance; Mabon's shadow is grasping what must be released. Working the shadow in its seasonal context makes the work more natural and potent.</p></div>`,
+    `<div class="spell-block"><h4>The Hexing Question — Ethics of Cursing</h4><p>Modern witchcraft has a rich and honest conversation about cursing and hexing. Some traditions follow a strict "harm none" principle. Others recognize that hex and curse work are part of the full spectrum of magical practice — historically used for justice, protection, and accountability.</p><p>Before any hex work, sit with these questions:<br>— Is this coming from genuine need for justice, or unprocessed anger?<br>— Have I exhausted mundane options?<br>— Am I prepared for the energetic cost?<br>— What does my highest ethical self say?</p><p>If you proceed, classic protection first: cast a circle, call your guardians, and close when done.</p></div>`,
+    `<div class="spell-block"><h4>Tapping (EFT) for Energetic Clearing</h4><p>Emotional Freedom Technique (EFT tapping) bridges psychological and energy work — it is shadow work with the body. Tap on specific meridian points while voicing what you are releasing.</p><ol><li>Identify the feeling or block: "I feel unworthy of receiving abundance."</li><li>Rate its intensity 0-10.</li><li>Setup: tap the karate chop point (outer edge of hand) saying: <em>"Even though I feel [X], I deeply and completely accept myself."</em> — 3 times.</li><li>Tap through: eyebrow, outer eye, under eye, under nose, chin, collarbone, underarm, top of head — speaking the feeling at each point.</li><li>Re-rate intensity. Repeat until it lowers.</li></ol></div>`,
+  ];
+  return shadow[w % shadow.length];
+}
+
+// ═══════════════════════════════════════════════
+// BUILD THE CALENDAR
+// ═══════════════════════════════════════════════
+
+const DAYS_IN_MONTH = [31,28,31,30,31,30,31,31,30,31,30,31];
+const FIRST_DAY = [4,0,0,3,5,1,3,6,2,4,0,2];
+const TODAY_M = 8, TODAY_D = 7; // Sep 7
+
+function buildApp() {
+  const nav = document.getElementById('mnav');
+  const panels = document.getElementById('panels');
+
+  MONTHS.forEach((mName, mi) => {
+    // Nav button
+    const btn = document.createElement('button');
+    btn.className = 'mnav-btn' + (mi === TODAY_M ? ' on' : '');
+    btn.textContent = mName.slice(0,3).toUpperCase();
+    btn.onclick = () => {
+      document.querySelectorAll('.mnav-btn').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      document.querySelectorAll('.mpanel').forEach(p => p.classList.remove('on'));
+      document.getElementById(`mp-${mi}`).classList.add('on');
+      window.scrollTo({top:0,behavior:'smooth'});
+    };
+    nav.appendChild(btn);
+
+    // Panel
+    const panel = document.createElement('div');
+    panel.className = 'mpanel' + (mi === TODAY_M ? ' on' : '');
+    panel.id = `mp-${mi}`;
+
+    const meta = MONTH_META[mi];
+
+    panel.innerHTML = `
+      <div class="season-banner">
+        <h2>${mName} 2026 — ${meta.season}</h2>
+        <p>${meta.essence}</p>
+        ${meta.sabbat ? `<p style="margin-top:.5rem;font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.7rem;letter-spacing:.1em;color:var(--gold);opacity:.8">✦ ${meta.sabbat}</p>` : ''}
+        <p style="margin-top:.4rem;font-size:.78rem;color:var(--silver);opacity:.65;font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;letter-spacing:.06em">${meta.lunarTheme}</p>
+      </div>`;
+
+    // Topic tabs
+    const topicRow = document.createElement('div');
+    topicRow.className = 'topic-row';
+    TOPICS.forEach((t, ti) => {
+      const tb = document.createElement('button');
+      tb.className = 'tbtn' + (ti === 0 ? ' on' : '');
+      tb.textContent = t.label;
+      tb.onclick = () => {
+        topicRow.querySelectorAll('.tbtn').forEach(b => b.classList.remove('on'));
+        tb.classList.add('on');
+        panel.querySelectorAll('.content-area').forEach(ca => ca.classList.remove('on'));
+        document.getElementById(`ca-${mi}-${t.id}`).classList.add('on');
+      };
+      topicRow.appendChild(tb);
+    });
+    panel.appendChild(topicRow);
+
+    // Content areas
+    TOPICS.forEach((t, ti) => {
+      const ca = document.createElement('div');
+      ca.className = 'content-area' + (ti === 0 ? ' on' : '');
+      ca.id = `ca-${mi}-${t.id}`;
+
+      // Build weeks
+      const weeks = buildWeeks(mi, mName, t.id);
+      ca.innerHTML = weeks;
+      panel.appendChild(ca);
+    });
+
+    panels.appendChild(panel);
+  });
+
+  // Wire week toggles
+  document.addEventListener('click', e => {
+    const wh = e.target.closest('.week-head');
+    if (!wh) return;
+    const wb = wh.nextElementSibling;
+    const isOn = wb.classList.contains('on');
+    // close siblings
+    const parent = wh.closest('.content-area');
+    if(parent){
+      parent.querySelectorAll('.week-body').forEach(b=>b.classList.remove('on'));
+      parent.querySelectorAll('.week-head').forEach(h=>h.classList.remove('on'));
+    }
+    if(!isOn){ wb.classList.add('on'); wh.classList.add('on'); }
+  });
+}
+
+function buildWeeks(mi, mName, topicId) {
+  const days = DAYS_IN_MONTH[mi];
+  const weeks = [];
+  let weekNum = 0;
+  let day = 1;
+
+  while(day <= days) {
+    const weekStart = day;
+    const weekEnd = Math.min(day + 6, days);
+    const label = `Week of ${mName} ${weekStart}–${weekEnd}`;
+
+    // Find moon events in this week
+    let moonNote = '';
+    for(let d = weekStart; d <= weekEnd; d++) {
+      const k = `${mi+1}-${d}`;
+      if(MOON_2026[k]) moonNote = MOON_2026[k];
+    }
+    // Sabbat?
+    for(let d = weekStart; d <= weekEnd; d++) {
+      const k = `${mi+1}-${d}`;
+      if(SABBATS[k]) moonNote = '✦ ' + SABBATS[k] + (moonNote ? ' · ' + moonNote : '');
+    }
+
+    const content = getWeekContent(mi, weekNum, topicId);
+
+    weeks.push(`
+      <div class="week-strip">
+        <div class="week-head">
+          <span class="week-label">${label}</span>
+          <span class="week-moon">${moonNote}</span>
+          <span class="week-chevron">▾</span>
+        </div>
+        <div class="week-body">
+          <div class="day-entry">
+            <div class="day-body">${content}</div>
+          </div>
+        </div>
+      </div>`);
+
+    day += 7;
+    weekNum++;
+  }
+  return weeks.join('');
+}
+
+// ═══════════════════════════════════════════════
+// AI ORACLE
+// ═══════════════════════════════════════════════
+
+const ORACLE_SYSTEM = `You are the Oracle of the Witch's Almanac — a deeply knowledgeable, warm, and poetic guide to all aspects of modern witchcraft, paganism, and spiritual practice. You speak in the voice of a wise, experienced witch: informed, grounded, occasionally lyrical, never condescending or preachy.
+
+You have deep knowledge of: tarot (all 78 cards, multiple traditions), the Wheel of the Year (all 8 Sabbats), Elder Futhark runes (all 24), lunar cycle magic, candle magic, herbalism, spellcraft, ancestral practice, shadow work, divination (scrying, pendulum, tea leaves, dream work, tasseography), manifestation, EFT tapping, modern witchcraft ethics including honest discussion of cursing and hexing, astrology, altar building, spell jars, incantations, and pagan mythology.
+
+When asked for a spell: provide complete instructions — materials list, numbered steps, and an incantation in italics. When asked about a rune or tarot card: give traditional meaning, reversed meaning, and practical magical application. When asked about a ritual: give it fully and practically. Be generous with detail. Be honest about ethics when relevant. Never use corporate wellness language. Format your response with clear sections using ✦ as section markers. Keep responses to 300–500 words — rich but not overwhelming.`;
+
+async function askOracle() {
+  const input = document.getElementById('oracleInput').value.trim();
+  const out = document.getElementById('oracleOut');
+  if (!input) return;
+
+  out.innerHTML = '<div class="loading-dots"><span></span><span></span><span></span></div>';
+
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-6",
+        max_tokens: 1000,
+        system: ORACLE_SYSTEM,
+        messages: [{ role: "user", content: input }]
+      })
+    });
+
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    const text = (data.content?.[0]?.text || "The Oracle is silent. Try again.")
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/\n/g, '<br>')
+      .replace(/✦ /g, '<strong style="color:var(--gold-light)">✦ </strong>');
+    out.innerHTML = `<p>${text}</p>`;
+  } catch (err) {
+    // Fallback: generate a rich response from built-in knowledge
+    out.innerHTML = generateOracleResponse(input);
+  }
+}
+
+// Rich fallback oracle using built-in knowledge
+function generateOracleResponse(query) {
+  const q = query.toLowerCase();
+
+  if (q.includes('candle') || q.includes('candle magic')) {
+    return `<p><strong style="color:var(--gold-light)">✦ Candle Magic Foundations</strong></p>
+<p>Candle magic is one of the most accessible and potent forms of spellwork. The candle is a microcosm of your intention: the wax is the material world, the flame is your will, and the smoke carries your words to the unseen.</p>
+<p><strong style="color:var(--gold-light)">✦ Color Correspondences</strong><br>
+White — purification, new beginnings, all-purpose<br>
+Black — banishing, protection, absorbing negativity<br>
+Red — passion, courage, love, vitality<br>
+Green — abundance, growth, healing, nature<br>
+Blue — peace, truth, communication, healing<br>
+Gold/Yellow — success, solar magic, confidence<br>
+Purple — psychic work, spirituality, power<br>
+Pink — self-love, gentle love, friendship<br>
+Orange — creativity, attraction, joy<br>
+Silver — moon magic, intuition, dreams</p>
+<p><strong style="color:var(--gold-light)">✦ Basic Candle Spell</strong></p>
+<p><em>Materials: A candle in your chosen color, anointing oil (olive, coconut, or an aligned essential oil), something to carve with.</em></p>
+<p>1. Carve your intention or a relevant symbol/rune into the candle.<br>
+2. Anoint with oil: for drawing things toward you, stroke from base to tip. For releasing, stroke from tip to base.<br>
+3. Hold the candle between your palms. Breathe your intention into it until the wax feels warm.<br>
+4. Light it. Say your intention aloud three times.<br>
+5. Let it burn completely if possible, or snuff (never blow) to pause and relight.</p>
+<p><em>"By flame and will and spoken word, my intention has been heard. As wax transforms to smoke and air, what I have cast is already there."</em></p>`;
+  }
+
+  if (q.includes('samhain') || q.includes('ancestor')) {
+    return `<p><strong style="color:var(--gold-light)">✦ Samhain & Ancestor Work</strong></p>
+<p>Samhain (Oct 31–Nov 1) is the Witch's New Year — the night the veil between living and dead thins to its most permeable. This is not a night to fear. It is a night to remember, to grieve, and to listen.</p>
+<p><strong style="color:var(--gold-light)">✦ Building Your Ancestor Altar</strong><br>
+Place photos of the beloved dead. Add something they loved in life — a food, a drink, an object. Include a glass of water (the dead are thirsty), a candle lit in their name, and marigolds (flowers of the dead across many traditions). Speak to it daily in October.</p>
+<p><strong style="color:var(--gold-light)">✦ The Dumb Supper Ritual</strong><br>
+On Samhain, prepare a meal in complete silence. Set one extra place at the table. Serve food and drink to the empty seat. Eat your own meal in silence, keeping your senses open to any impressions — a memory, a feeling, a scent. After, speak each ancestor's name aloud and thank them.</p>
+<p><em>"The veil is thin, the door is wide. I call my people to my side. Not in fear, but in love and knowing — we are connected, coming and going. [Name], [Name] — I remember you."</em></p>`;
+  }
+
+  if (q.includes('rune') || q.includes('futhark')) {
+    return `<p><strong style="color:var(--gold-light)">✦ Working with the Elder Futhark</strong></p>
+<p>The Elder Futhark consists of 24 runes, each a letter, a concept, and a living force. Unlike tarot, runes are not merely symbols — in Norse cosmology they are mysteries that Odin won at great cost, hanging on the World Tree for nine days without food or water.</p>
+<p><strong style="color:var(--gold-light)">✦ Three Runes for Beginners to Start With</strong></p>
+<p><strong>ᛉ Algiz</strong> — Protection. The elk's antler reaching upward. Draw this on your door, your body, or in the air when you need shielding. It connects you to your highest guidance and turns away harm.</p>
+<p><strong>ᚠ Fehu</strong> — Abundance. Cattle, wealth, the flow of prosperity. Carve into a green candle when opening a new financial chapter or calling in material support.</p>
+<p><strong>ᛊ Sowilo</strong> — The Sun. Victory, wholeness, healing. Use in healing spells and when you need to reconnect with your own radiance. One of the most purely positive runes.</p>
+<p><strong style="color:var(--gold-light)">✦ Daily Rune Practice</strong><br>
+Draw one rune from a bag each morning without looking. Hold it. Feel it. Carry it through your day and notice where its energy appears. This practice alone, done daily, will make you fluent in rune-speech within a year.</p>`;
+  }
+
+  if (q.includes('hex') || q.includes('curse') || q.includes('banish')) {
+    return `<p><strong style="color:var(--gold-light)">✦ On Hexing, Cursing & Banishing — An Honest Teaching</strong></p>
+<p>Modern witchcraft has a rich and sometimes heated debate about this. "Harm none" (the Wiccan Rede) is one ethical framework — but it is not the only one, and many traditions predate it by millennia. Historically, witches have always worked the full spectrum of magic, including protective curses and justice work.</p>
+<p><strong style="color:var(--gold-light)">✦ Before Any Hex Work, Ask Honestly</strong><br>
+— Is this coming from genuine need for protection or justice, or unprocessed rage?<br>
+— Have I truly exhausted mundane options?<br>
+— Am I prepared for the energetic cost of carrying this?<br>
+— What does my most grounded self say?</p>
+<p><strong style="color:var(--gold-light)">✦ A Basic Banishing (Ethically Neutral)</strong><br>
+Write the name of what you are banishing on black paper. Anoint a black candle with black pepper oil (stroking away from you). Light it. Burn the paper in its flame. Say: <em>"I banish your hold on my life and energy. You no longer have power here. I reclaim what is mine."</em> Scatter the ashes at a crossroads or flush them away. Salt-cleanse yourself afterward.</p>
+<p>Protection always comes first. Cast your circle, call your guardians, and ground deeply after any banishing or hex work.</p>`;
+  }
+
+  if (q.includes('moon') || q.includes('lunar')) {
+    return `<p><strong style="color:var(--gold-light)">✦ Lunar Magic — Working with the Moon's Phases</strong></p>
+<p>The moon is the witch's primary clock. Her eight phases each carry distinct magical energy, and aligning your practice with them is one of the fastest ways to deepen your craft.</p>
+<p><strong style="color:var(--gold-light)">✦ The Four Primary Phases</strong></p>
+<p><strong>🌑 New Moon</strong> — Plant intentions in the dark. This is not a time of action but of seeding. Write your desires, speak them to the void, bury them in earth. The new moon is the womb.</p>
+<p><strong>🌒 Waxing Moon</strong> — Build and attract. As the light grows, pour energy into your intentions. Light candles, take actions aligned with your goals, use drawing spells.</p>
+<p><strong>🌕 Full Moon</strong> — Amplify everything. Your most potent magic happens here. Charge your tools, do your most significant rituals, express gratitude, and receive. The full moon also reveals what has been hidden.</p>
+<p><strong>🌘 Waning Moon</strong> — Release and banish. Let go, cut cords, clear clutter (physical and emotional). Shadow work, banishing spells, and cord-cutting rituals belong to the waning moon.</p>
+<p><strong style="color:var(--gold-light)">✦ Moon Water Recipe</strong><br>
+Fill a sealed glass jar with spring water. Set it in direct moonlight overnight (full moon is most potent, but any phase works). Speak your intention into the water before placing it. Retrieve before sunrise. Use to anoint candles, crystals, your forehead, or add to ritual baths.</p>`;
+  }
+
+  // Default rich response
+  return `<p><strong style="color:var(--gold-light)">✦ Oracle Response</strong></p>
+<p>Your question touches the craft in meaningful ways. Here is what the Oracle offers:</p>
+<p>Every magical practice — whether tarot, spellwork, herbalism, or ritual — rests on the same foundation: <strong>conscious, intentional attention</strong>. The tools are never the source of the magic. You are. The card, the candle, the herb, the rune — these are all external structures for your own deep knowing to organize itself around.</p>
+<p><strong style="color:var(--gold-light)">✦ A Practice for Right Now</strong><br>
+Light a single candle. Sit before it for five minutes with your question held gently — not gripped, not analyzed, just held. Notice what arises: an image, a feeling, a memory, a word. Write it down without editing. This is the Oracle speaking through your own intuition, which is the most reliable oracle there is.</p>
+<p><strong style="color:var(--gold-light)">✦ For Deeper Work</strong><br>
+Try asking the Oracle something more specific: a spell for a particular need, a rune or tarot card to learn, a ritual for the current moon phase, or guidance on a specific magical technique. The more precise your question, the more precise the answer.</p>
+<p><em>"The magic was never outside you. It was only waiting for you to stop looking away."</em></p>`;
+}
+
+document.getElementById('oracleInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) askOracle();
+});
+
+buildApp();
+</script>
+</body>
+</html>

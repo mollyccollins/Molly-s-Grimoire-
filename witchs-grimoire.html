@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Witch's Grimoire — Tarot & Wheel of the Year</title>
+
+<style>
+:root {
+  --ink: #0e0618;
+  --parchment: #f2e8d5;
+  --parchment-dark: #e0d0b5;
+  --gold: #b8862a;
+  --gold-light: #d9a84e;
+  --gold-pale: #f0d090;
+  --moonsilver: #c8c2de;
+  --deep: #1a0a30;
+  --rose: #7a2a3a;
+  --sage: #3a5c38;
+  --ember: #a04020;
+  --slate: #2a2240;
+  --text: #2a1a0e;
+  --text-soft: #4a3a2a;
+  --border: rgba(184,134,42,0.25);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: #0a0514;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── STARFIELD ── */
+.cosmos {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 30% 20%, #1a0830 0%, transparent 55%),
+              radial-gradient(ellipse at 70% 75%, #0a1828 0%, transparent 50%),
+              #06030e;
+}
+.cosmos::after {
+  content:'';position:absolute;inset:0;
+  background-image:
+    radial-gradient(1px 1px at 8% 12%,rgba(255,251,230,.7) 0%,transparent 100%),
+    radial-gradient(1px 1px at 22% 8%,rgba(255,251,230,.5) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 38% 20%,rgba(255,251,230,.8) 0%,transparent 100%),
+    radial-gradient(1px 1px at 55% 5%,rgba(200,194,222,.6) 0%,transparent 100%),
+    radial-gradient(1px 1px at 72% 15%,rgba(255,251,230,.5) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 88% 10%,rgba(255,251,230,.7) 0%,transparent 100%),
+    radial-gradient(1px 1px at 15% 45%,rgba(255,251,230,.4) 0%,transparent 100%),
+    radial-gradient(1px 1px at 45% 55%,rgba(200,194,222,.5) 0%,transparent 100%),
+    radial-gradient(2px 2px at 65% 40%,rgba(255,251,230,.6) 0%,transparent 100%),
+    radial-gradient(1px 1px at 92% 50%,rgba(255,251,230,.5) 0%,transparent 100%),
+    radial-gradient(1px 1px at 5% 75%,rgba(255,251,230,.4) 0%,transparent 100%),
+    radial-gradient(1px 1px at 50% 80%,rgba(200,194,222,.6) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 80% 85%,rgba(255,251,230,.5) 0%,transparent 100%),
+    radial-gradient(1px 1px at 30% 92%,rgba(255,251,230,.4) 0%,transparent 100%),
+    radial-gradient(1px 1px at 60% 95%,rgba(200,194,222,.5) 0%,transparent 100%);
+}
+
+/* ── SHELL ── */
+.shell {
+  position: relative; z-index: 1;
+  max-width: 960px; margin: 0 auto; padding: 0 1.25rem 5rem;
+}
+
+/* ── COVER ── */
+.cover {
+  text-align: center;
+  padding: 3.5rem 1rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+.cover-glyph { font-size: 2.8rem; line-height:1; margin-bottom:.6rem;
+  animation: breathe 5s ease-in-out infinite alternate; }
+@keyframes breathe {
+  from { filter: drop-shadow(0 0 6px rgba(200,194,222,.3)); }
+  to   { filter: drop-shadow(0 0 22px rgba(217,168,78,.5)); }
+}
+.cover h1 {
+  font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;letter-spacing:0.1em;
+  font-size: clamp(1.5rem,4vw,2.6rem);
+  color: var(--gold-pale);
+  letter-spacing:.1em;
+  text-shadow: 0 0 40px rgba(184,134,42,.4), 0 2px 6px rgba(0,0,0,.9);
+  line-height:1.2;
+}
+.cover p {
+  font-family:Georgia,'Times New Roman',serif; font-style:italic;
+  color: var(--moonsilver); font-size:.95rem; margin-top:.5rem; opacity:.8;
+}
+.cover-rule {
+  display:flex; align-items:center; gap:1rem; max-width:400px;
+  margin:1.2rem auto 0; justify-content:center;
+}
+.cover-rule div { flex:1; height:1px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent); opacity:.4; }
+.cover-rule span { color:var(--gold); font-size:1rem; opacity:.7; }
+
+/* ── TABS ── */
+.tabs {
+  display:flex; gap:.5rem; justify-content:center;
+  margin-bottom:2.5rem; flex-wrap:wrap;
+}
+.tab-btn {
+  font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps; font-size:.72rem; letter-spacing:.1em;
+  text-transform:uppercase; padding:.55rem 1.4rem;
+  background:rgba(26,10,48,.6); border:1px solid rgba(184,134,42,.2);
+  color:var(--moonsilver); cursor:pointer; border-radius:2px;
+  transition:all .25s;
+}
+.tab-btn:hover, .tab-btn.on {
+  background:rgba(184,134,42,.18); border-color:var(--gold);
+  color:var(--gold-pale); box-shadow:0 0 14px rgba(184,134,42,.15);
+}
+
+/* ── SECTIONS ── */
+.section { display:none; animation: fadeUp .4s ease; }
+.section.on { display:block; }
+@keyframes fadeUp {
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ── GRIMOIRE CARD ── */
+.g-card {
+  background: linear-gradient(160deg, rgba(242,232,213,.97) 0%, rgba(224,208,181,.97) 100%);
+  border: 1px solid var(--parchment-dark);
+  border-radius:4px;
+  padding:2rem 2.2rem;
+  margin-bottom:1.5rem;
+  box-shadow: 0 4px 30px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.3);
+  position:relative;
+}
+.g-card::before {
+  content:''; position:absolute; inset:0; border-radius:4px; pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  opacity:.5;
+}
+
+.g-card h2 {
+  font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;letter-spacing:0.1em; font-size:1.25rem;
+  color:var(--text); letter-spacing:.06em; margin-bottom:.25rem;
+}
+.g-card h3 {
+  font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps; font-size:.8rem; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:.8rem;
+  padding-bottom:.4rem; border-bottom:1px solid rgba(184,134,42,.2);
+}
+.g-card p, .g-card li {
+  font-size:.97rem; line-height:1.8; color:var(--text-soft);
+}
+.g-card ul, .g-card ol {
+  padding-left:1.2rem; margin:.5rem 0;
+}
+.g-card li { margin-bottom:.2rem; }
+.g-card strong { color:var(--text); font-weight:600; }
+.g-card em { font-style:italic; color:var(--rose); }
+
+.lore-box {
+  background: rgba(58,92,56,.08);
+  border-left:3px solid var(--sage);
+  padding:.75rem 1rem; border-radius:0 3px 3px 0;
+  margin:.8rem 0;
+}
+.lore-box p { font-family:Georgia,'Times New Roman',serif; font-style:italic; font-size:.93rem; color:var(--text); }
+
+.tip-box {
+  background:rgba(184,134,42,.08);
+  border-left:3px solid var(--gold);
+  padding:.75rem 1rem; border-radius:0 3px 3px 0; margin:.8rem 0;
+}
+.tip-box p { font-size:.9rem; color:var(--text-soft); }
+
+/* ── WHEEL VISUAL ── */
+.wheel-wrap {
+  display:flex; flex-wrap:wrap; gap:1rem;
+  margin:1rem 0;
+}
+.sabbat-card {
+  flex:1; min-width:200px;
+  background:rgba(26,10,48,.85);
+  border:1px solid var(--border);
+  border-radius:4px; padding:1rem 1.1rem;
+  cursor:pointer; transition:all .2s;
+  color:var(--parchment);
+}
+.sabbat-card:hover { border-color:var(--gold); background:rgba(45,27,78,.9);
+  transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.5); }
+.sabbat-card.open { border-color:var(--gold); background:rgba(45,27,78,.9); }
+.sc-top { display:flex; align-items:center; gap:.6rem; margin-bottom:.4rem; }
+.sc-emoji { font-size:1.4rem; }
+.sc-name { font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps; font-size:.82rem; letter-spacing:.07em; color:var(--gold-pale); }
+.sc-date { font-size:.75rem; color:var(--moonsilver); opacity:.7; }
+.sc-body { display:none; font-size:.85rem; line-height:1.7;
+  color:rgba(242,232,213,.85); border-top:1px solid rgba(184,134,42,.15); padding-top:.7rem; margin-top:.5rem; }
+.sc-body.open { display:block; }
+.sc-body h5 { font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps; font-size:.65rem; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--gold); margin:.6rem 0 .2rem; opacity:.8; }
+
+/* ── MOON PHASES ── */
+.moon-row {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:.7rem; margin:1rem 0;
+}
+.moon-phase {
+  background:rgba(26,10,48,.8); border:1px solid var(--border);
+  border-radius:4px; padding:.8rem; text-align:center; cursor:pointer; transition:all .2s;
+}
+.moon-phase:hover { border-color:var(--moonsilver); background:rgba(45,27,78,.85); }
+.moon-phase.open { border-color:var(--moonsilver); }
+.mp-glyph { font-size:1.8rem; }
+.mp-name { font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps; font-size:.65rem; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--moonsilver); margin:.3rem 0 .1rem; }
+.mp-body { display:none; font-size:.8rem; line-height:1.6;
+  color:rgba(242,232,213,.8); text-align:left; border-top:1px solid rgba(200,194,222,.15);
+  padding-top:.6rem; margin-top:.5rem; }
+.mp-body.open { display:block; }
+
+/* ── TAROT ── */
+.suit-tabs {
+  display:flex; flex-wrap:wrap; gap:.4rem; margin:.8rem 0 1.2rem;
+}
+.suit-btn {
+  font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps; font-size:.68rem; letter-spacing:.09em;
+  text-transform:uppercase; padding:.4rem 1rem;
+  background:rgba(26,10,48,.7); border:1px solid rgba(184,134,42,.2);
+  color:var(--moonsilver); cursor:pointer; border-radius:2px; transition:all .2s;
+}
+.suit-btn:hover,.suit-btn.on {
+  border-color:var(--gold); color:var(--gold-pale);
+  background:rgba(184,134,42,.15);
+}
+
+.tarot-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:.7rem;
+}
+.t-card {
+  background:rgba(26,10,48,.85); border:1px solid var(--border);
+  border-radius:4px; padding:.9rem .8rem; cursor:pointer; transition:all .2s;
+  text-align:center;
+}
+.t-card:hover { border-color:var(--gold); background:rgba(45,27,78,.9);
+  transform:translateY(-2px); }
+.t-card.open { border-color:var(--gold-light); }
+.tc-num { font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps; font-size:.6rem; letter-spacing:.1em;
+  color:var(--gold); opacity:.6; text-transform:uppercase; margin-bottom:.2rem; }
+.tc-glyph { font-size:1.6rem; margin:.2rem 0; }
+.tc-name { font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps; font-size:.72rem; letter-spacing:.05em;
+  color:var(--moonsilver); line-height:1.3; }
+.tc-body {
+  display:none; text-align:left; font-size:.8rem; line-height:1.65;
+  color:rgba(242,232,213,.82); border-top:1px solid rgba(184,134,42,.15);
+  padding-top:.7rem; margin-top:.6rem;
+}
+.tc-body.open { display:block; }
+.tc-body h5 { font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps; font-size:.6rem; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--gold); opacity:.7; margin:.5rem 0 .15rem; }
+.tc-kw { display:flex; flex-wrap:wrap; gap:.3rem; margin:.3rem 0; }
+.tc-kw span {
+  font-size:.65rem; font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps; letter-spacing:.05em;
+  background:rgba(184,134,42,.15); border:1px solid rgba(184,134,42,.2);
+  color:var(--gold-pale); padding:.1rem .4rem; border-radius:2px;
+}
+
+/* ── SPREADS ── */
+.spread-card {
+  background:rgba(26,10,48,.85); border:1px solid var(--border);
+  border-radius:4px; padding:1.2rem 1.4rem; margin-bottom:1rem; cursor:pointer; transition:all .2s;
+}
+.spread-card:hover { border-color:var(--gold); }
+.spread-card.open { border-color:var(--gold-light); }
+.sp-top { display:flex; justify-content:space-between; align-items:center; }
+.sp-name { font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps; font-size:.88rem; letter-spacing:.07em; color:var(--gold-pale); }
+.sp-cards { font-size:.72rem; color:var(--moonsilver); opacity:.7; font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps; }
+.sp-body { display:none; font-size:.88rem; line-height:1.75;
+  color:rgba(242,232,213,.85); border-top:1px solid rgba(184,134,42,.15);
+  padding-top:.9rem; margin-top:.8rem; }
+.sp-body.open { display:block; }
+.pos-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:.5rem; margin:.7rem 0; }
+.pos-item { background:rgba(184,134,42,.08); border:1px solid rgba(184,134,42,.15);
+  border-radius:3px; padding:.5rem .7rem; }
+.pos-num { font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps; font-size:.58rem; letter-spacing:.1em;
+  color:var(--gold); text-transform:uppercase; opacity:.7; }
+.pos-label { font-size:.8rem; color:rgba(242,232,213,.85); margin-top:.1rem; }
+
+/* ── READING GUIDE ── */
+.method-step {
+  display:flex; gap:1rem; margin-bottom:1.2rem; align-items:flex-start;
+}
+.step-num {
+  flex-shrink:0; width:2rem; height:2rem;
+  background:rgba(184,134,42,.15); border:1px solid rgba(184,134,42,.3);
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps; font-size:.75rem; color:var(--gold);
+}
+.step-body h4 { font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps; font-size:.78rem; letter-spacing:.07em;
+  color:var(--gold-pale); margin-bottom:.3rem; text-transform:uppercase; }
+.step-body p { font-size:.9rem; line-height:1.75; color:rgba(242,232,213,.82); }
+
+/* ── FLIP INDICATOR ── */
+.flip-hint {
+  font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps; font-size:.6rem; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); opacity:.5; text-align:center;
+  margin-top:.5rem;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:#06030e}
+::-webkit-scrollbar-thumb{background:rgba(184,134,42,.3);border-radius:3px}
+
+@media(max-width:600px){
+  .g-card{padding:1.2rem 1.1rem}
+  .tarot-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+}
+</style>
+</head>
+<body>
+
+
+  <div id="phoneBanner" style="display:none;background:rgba(184,134,42,0.15);border-bottom:1px solid rgba(184,134,42,0.3);padding:.6rem 1rem;text-align:center;font-size:.75rem;color:rgba(240,208,144,.9);letter-spacing:.05em;font-family:Georgia,serif">
+    📱 <strong>To use daily on your phone:</strong> Tap Share → "Add to Home Screen" to save as an app icon
+    <button onclick="document.getElementById('phoneBanner').style.display='none'" style="margin-left:1rem;background:none;border:1px solid rgba(184,134,42,.4);color:#d9a84e;font-size:.65rem;padding:.2rem .5rem;cursor:pointer;border-radius:2px">✕</button>
+  </div>
+  <script>if (/iPhone|iPad|Android/i.test(navigator.userAgent)) { document.getElementById('phoneBanner').style.display='block'; }</script>
+
+<div class="cosmos"></div>
+
+<div class="shell">
+
+  <div class="cover">
+    <div class="cover-glyph">✦ ☽ ✦</div>
+    <h1>The Witch's Grimoire</h1>
+    <p>Mastering the Wheel of the Year &amp; the Art of Tarot</p>
+    <div class="cover-rule"><div></div><span>❧</span><div></div></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn on" onclick="showTab('wheel')">☽ Wheel of the Year</button>
+    <button class="tab-btn" onclick="showTab('lunar')">🌕 Lunar Cycles</button>
+    <button class="tab-btn" onclick="showTab('major')">✦ Major Arcana</button>
+    <button class="tab-btn" onclick="showTab('minor')">🌿 Minor Arcana</button>
+    <button class="tab-btn" onclick="showTab('reading')">🃏 How to Read</button>
+    <button class="tab-btn" onclick="showTab('spreads')">⊕ Spreads</button>
+  </div>
+
+  <!-- ════════════════ WHEEL OF THE YEAR ════════════════ -->
+  <div class="section on" id="tab-wheel">
+
+    <div class="g-card">
+      <h2>The Wheel of the Year</h2>
+      <h3>Understanding the Sacred Cycle</h3>
+      <p>The Wheel of the Year is the backbone of all Wiccan and pagan practice — eight festivals, or <strong>Sabbats</strong>, distributed evenly across the solar year. Together they tell one continuous mythological story: the birth, courtship, union, aging, death, and rebirth of the Divine.</p>
+      <div class="lore-box"><p>Think of the Wheel not as eight separate holidays but as <em>one living story told in eight chapters.</em> Once you feel the narrative arc, each Sabbat becomes a doorway — you step through knowing exactly where you've been and where you're going.</p></div>
+
+      <h3>The Two Layers</h3>
+      <p>The Wheel has two overlapping layers:</p>
+      <ul>
+        <li><strong>The Solar Festivals (Quarter Days)</strong> — the solstices and equinoxes, when the sun reaches its extreme or balanced points: <em>Yule, Ostara, Litha, Mabon.</em></li>
+        <li><strong>The Fire Festivals (Cross-Quarter Days)</strong> — the midpoints between solstices/equinoxes, the older Celtic celebrations considered the most magically potent: <em>Imbolc, Beltane, Lughnasadh, Samhain.</em></li>
+      </ul>
+      <div class="tip-box"><p>✦ <strong>Key insight:</strong> The Fire Festivals are older and considered more powerful because they mark the <em>peak</em> of each season — when the season's energy is fullest — rather than the turning point.</p></div>
+
+      <h3>The Mythological Story</h3>
+      <p>Most traditions follow a version of this arc through the Goddess and the God:</p>
+      <ul>
+        <li>🌑 <strong>Yule:</strong> The Goddess gives birth to the reborn Sun God in the darkest night.</li>
+        <li>🕯️ <strong>Imbolc:</strong> Brigid kindles the first sparks; the infant God grows. The Goddess recovers.</li>
+        <li>🌸 <strong>Ostara:</strong> The Goddess as Maiden; the young God courts the land back to life.</li>
+        <li>🔥 <strong>Beltane:</strong> The God and Goddess unite in sacred marriage; the earth ignites with fertility.</li>
+        <li>☀️ <strong>Litha:</strong> The God at his solar peak — triumphant, full, beginning his descent.</li>
+        <li>🌾 <strong>Lughnasadh:</strong> First harvest; the God willingly sacrifices himself to feed the people.</li>
+        <li>🍂 <strong>Mabon:</strong> The God descends to the Underworld; the Goddess becomes the Crone of grief.</li>
+        <li>🕯️ <strong>Samhain:</strong> The God rules the spirit realm; the Goddess mourns and transforms at the veil.</li>
+      </ul>
+      <p style="margin-top:.7rem">Then Yule arrives again — and the cycle begins anew. <em>Death is always followed by rebirth.</em></p>
+    </div>
+
+    <div class="g-card" style="background:rgba(13,6,24,.92); border-color:rgba(184,134,42,.3);">
+      <h3 style="color:var(--gold-pale)">✦ The Eight Sabbats — Click Each to Explore</h3>
+      <p style="color:rgba(242,232,213,.7); font-size:.88rem; margin-bottom:1rem;">Tap any Sabbat to reveal its deep teachings, correspondences, and ritual guidance.</p>
+      <div class="wheel-wrap" id="sabbatWrap"></div>
+    </div>
+
+    <div class="g-card">
+      <h2>How to Work with the Wheel</h2>
+      <h3>Making the Sabbats Your Own</h3>
+      <p>The Wheel is not a rule book — it's a <strong>living framework</strong> you grow into over years. Here's how to deepen your practice:</p>
+      <ol>
+        <li style="margin-bottom:.6rem"><strong>Start with the season you're in.</strong> Don't try to memorize all eight. Begin where you are, feel the energy of the current season, and let that be your teacher.</li>
+        <li style="margin-bottom:.6rem"><strong>Create even one small ritual.</strong> Light a candle. Bake bread. Sit outside. The act of conscious acknowledgment matters infinitely more than elaborate ceremony.</li>
+        <li style="margin-bottom:.6rem"><strong>Notice nature responding.</strong> What birds are singing? What is blooming or dying? What does the light feel like? The Wheel makes you attentive — and attention <em>is</em> magic.</li>
+        <li style="margin-bottom:.6rem"><strong>Track it in a journal.</strong> Write one entry per Sabbat for a full year. By the time you've completed the circle, you'll know the Wheel in your bones.</li>
+      </ol>
+      <div class="lore-box"><p>The goal isn't to perform the Wheel perfectly — it's to <em>feel yourself turning with it.</em> You are not observing the seasons. You are the seasons.</p></div>
+    </div>
+
+  </div>
+
+  <!-- ════════════════ LUNAR CYCLES ════════════════ -->
+  <div class="section" id="tab-lunar">
+    <div class="g-card">
+      <h2>The Sacred Lunar Cycle</h2>
+      <h3>Why the Moon Matters in Witchcraft</h3>
+      <p>While the Wheel of the Year follows the <em>sun</em>, the <strong>Esbats</strong> follow the <em>moon</em> — the 13 full moons of the year that anchor the monthly rhythm of magical practice. The moon governs intuition, emotion, the tides of the inner sea, and the subtle cycles of energy in all living things.</p>
+      <div class="tip-box"><p>✦ A simple rule of thumb: <strong>Sun magic</strong> = outer world, manifestation, vitality, the year's arc. <strong>Moon magic</strong> = inner world, intuition, release, monthly rhythm.</p></div>
+      <h3>The 8 Moon Phases — Click Each to Learn</h3>
+      <p style="font-size:.9rem; color:var(--text-soft); margin-bottom:.8rem">Each phase has its own magical signature. Understanding them transforms your spellwork from guesswork into precision.</p>
+      <div class="moon-row" id="moonRow"></div>
+    </div>
+
+    <div class="g-card">
+      <h2>The 13 Moons of 2026</h2>
+      <h3>Full Moon Names & Their Magic</h3>
+      <p>Each full moon carries a traditional name drawn from nature, reflecting what is happening on the earth at that time. These names are your <em>seasonal almanac</em> — they tell you what energies to work with.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem;margin-top:.8rem">
+        <div class="moon-phase" style="text-align:left;padding:.9rem 1rem">
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.65rem;letter-spacing:.1em;color:var(--gold);opacity:.7;text-transform:uppercase">Jan 3</div>
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.8rem;color:var(--moonsilver);margin:.2rem 0">🐺 Wolf Moon in Cancer</div>
+          <div style="font-size:.78rem;color:rgba(242,232,213,.7)">Survival, intuition, family bonds. Dream work, protection spells.</div>
+        </div>
+        <div class="moon-phase" style="text-align:left;padding:.9rem 1rem">
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.65rem;letter-spacing:.1em;color:var(--gold);opacity:.7;text-transform:uppercase">Feb 1</div>
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.8rem;color:var(--moonsilver);margin:.2rem 0">❄️ Snow Moon in Leo</div>
+          <div style="font-size:.78rem;color:rgba(242,232,213,.7)">Inner fire, courage, creativity. Self-love and radiance rituals.</div>
+        </div>
+        <div class="moon-phase" style="text-align:left;padding:.9rem 1rem">
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.65rem;letter-spacing:.1em;color:var(--gold);opacity:.7;text-transform:uppercase">Mar 3 🔥</div>
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.8rem;color:var(--moonsilver);margin:.2rem 0">🩸 Worm Moon + Total Eclipse</div>
+          <div style="font-size:.78rem;color:rgba(242,232,213,.7)">Shadow work, release, transformation. Most potent moon of 2026.</div>
+        </div>
+        <div class="moon-phase" style="text-align:left;padding:.9rem 1rem">
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.65rem;letter-spacing:.1em;color:var(--gold);opacity:.7;text-transform:uppercase">Apr 1</div>
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.8rem;color:var(--moonsilver);margin:.2rem 0">🌸 Pink Moon in Libra</div>
+          <div style="font-size:.78rem;color:rgba(242,232,213,.7)">Love, harmony, balance. Relationship and beauty magic.</div>
+        </div>
+        <div class="moon-phase" style="text-align:left;padding:.9rem 1rem">
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.65rem;letter-spacing:.1em;color:var(--gold);opacity:.7;text-transform:uppercase">May 1 ✦</div>
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.8rem;color:var(--moonsilver);margin:.2rem 0">🌺 Flower Moon on Beltane</div>
+          <div style="font-size:.78rem;color:rgba(242,232,213,.7)">Most powerful day of year. Passion, manifestation, sacred union.</div>
+        </div>
+        <div class="moon-phase" style="text-align:left;padding:.9rem 1rem">
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.65rem;letter-spacing:.1em;color:var(--gold);opacity:.7;text-transform:uppercase">Jun 14</div>
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.8rem;color:var(--moonsilver);margin:.2rem 0">🍓 Strawberry Moon in Sag</div>
+          <div style="font-size:.78rem;color:rgba(242,232,213,.7)">Adventure, expansion, spiritual truth-seeking.</div>
+        </div>
+        <div class="moon-phase" style="text-align:left;padding:.9rem 1rem">
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.65rem;letter-spacing:.1em;color:var(--gold);opacity:.7;text-transform:uppercase">Jul 14</div>
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.8rem;color:var(--moonsilver);margin:.2rem 0">🦌 Buck Moon in Capricorn</div>
+          <div style="font-size:.78rem;color:rgba(242,232,213,.7)">Achievement, earned growth, ambition magic.</div>
+        </div>
+        <div class="moon-phase" style="text-align:left;padding:.9rem 1rem">
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.65rem;letter-spacing:.1em;color:var(--gold);opacity:.7;text-transform:uppercase">Aug 12</div>
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.8rem;color:var(--moonsilver);margin:.2rem 0">🐟 Sturgeon Moon in Aquarius</div>
+          <div style="font-size:.78rem;color:rgba(242,232,213,.7)">Community, collective healing, future visioning.</div>
+        </div>
+        <div class="moon-phase" style="text-align:left;padding:.9rem 1rem">
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.65rem;letter-spacing:.1em;color:var(--gold);opacity:.7;text-transform:uppercase">Sep 11</div>
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.8rem;color:var(--moonsilver);margin:.2rem 0">🌾 Harvest Moon in Pisces</div>
+          <div style="font-size:.78rem;color:rgba(242,232,213,.7)">Mystical release, gratitude, emotional completion.</div>
+        </div>
+        <div class="moon-phase" style="text-align:left;padding:.9rem 1rem">
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.65rem;letter-spacing:.1em;color:var(--gold);opacity:.7;text-transform:uppercase">Oct 11</div>
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.8rem;color:var(--moonsilver);margin:.2rem 0">🏹 Hunter's Moon in Aries</div>
+          <div style="font-size:.78rem;color:rgba(242,232,213,.7)">Courage, facing shadows, spirit contact begins.</div>
+        </div>
+        <div class="moon-phase" style="text-align:left;padding:.9rem 1rem">
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.65rem;letter-spacing:.1em;color:var(--gold);opacity:.7;text-transform:uppercase">Nov 10</div>
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.8rem;color:var(--moonsilver);margin:.2rem 0">🦫 Beaver Moon in Taurus</div>
+          <div style="font-size:.78rem;color:rgba(242,232,213,.7)">Abundance, home protection, body wisdom.</div>
+        </div>
+        <div class="moon-phase" style="text-align:left;padding:.9rem 1rem">
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.65rem;letter-spacing:.1em;color:var(--gold);opacity:.7;text-transform:uppercase">Dec 9</div>
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.8rem;color:var(--moonsilver);margin:.2rem 0">❄️ Cold Moon in Gemini</div>
+          <div style="font-size:.78rem;color:rgba(242,232,213,.7)">Duality, reflection, preparing for Yule rebirth.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════ MAJOR ARCANA ════════════════ -->
+  <div class="section" id="tab-major">
+    <div class="g-card">
+      <h2>The Major Arcana</h2>
+      <h3>The Soul's Journey — 22 Cards of Fate</h3>
+      <p>The Major Arcana tells the story of <strong>The Fool's Journey</strong> — the soul's path from innocent beginnings through every archetypal experience, toward wholeness and enlightenment. When a Major Arcana card appears in a reading, it signals a <em>significant, soul-level theme</em> — not just daily events, but deep spiritual lessons.</p>
+      <div class="tip-box"><p>✦ <strong>Reading tip:</strong> Lots of Major Arcana in one spread = the Universe is speaking loudly. The situation carries weight beyond the everyday. Pay deep attention.</p></div>
+      <p style="margin-top:.5rem; font-size:.88rem; color:var(--text-soft)">Click any card to reveal its full teaching.</p>
+    </div>
+    <div class="g-card" style="background:rgba(13,6,24,.92);border-color:rgba(184,134,42,.3)">
+      <div class="tarot-grid" id="majorGrid"></div>
+    </div>
+  </div>
+
+  <!-- ════════════════ MINOR ARCANA ════════════════ -->
+  <div class="section" id="tab-minor">
+    <div class="g-card">
+      <h2>The Minor Arcana</h2>
+      <h3>The Four Suits — Daily Life &amp; Elemental Forces</h3>
+      <p>The 56 Minor Arcana cards describe the texture of everyday experience through four elemental suits. Each suit governs a domain of life and corresponds to one of the four classical elements.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.7rem;margin:.8rem 0 1rem">
+        <div style="background:rgba(160,64,32,.15);border:1px solid rgba(160,64,32,.3);border-radius:3px;padding:.8rem 1rem">
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.72rem;letter-spacing:.08em;color:#e07040;text-transform:uppercase;margin-bottom:.3rem">🔥 Wands — Fire</div>
+          <p style="font-size:.82rem;color:rgba(242,232,213,.8)">Passion, creativity, ambition, willpower, career, inspiration. The spark of life itself.</p>
+        </div>
+        <div style="background:rgba(42,80,140,.15);border:1px solid rgba(42,80,140,.3);border-radius:3px;padding:.8rem 1rem">
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.72rem;letter-spacing:.08em;color:#6090d0;text-transform:uppercase;margin-bottom:.3rem">💧 Cups — Water</div>
+          <p style="font-size:.82rem;color:rgba(242,232,213,.8)">Emotion, intuition, love, relationships, dreams, the unconscious. The feeling body.</p>
+        </div>
+        <div style="background:rgba(180,160,30,.12);border:1px solid rgba(180,160,30,.3);border-radius:3px;padding:.8rem 1rem">
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.72rem;letter-spacing:.08em;color:#c8b040;text-transform:uppercase;margin-bottom:.3rem">💨 Swords — Air</div>
+          <p style="font-size:.82rem;color:rgba(242,232,213,.8)">Thought, truth, conflict, clarity, communication, challenges, the mind's blade.</p>
+        </div>
+        <div style="background:rgba(58,92,38,.15);border:1px solid rgba(58,92,38,.3);border-radius:3px;padding:.8rem 1rem">
+          <div style="font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;font-size:.72rem;letter-spacing:.08em;color:#80b060;text-transform:uppercase;margin-bottom:.3rem">🌍 Pentacles — Earth</div>
+          <p style="font-size:.82rem;color:rgba(242,232,213,.8)">Money, material world, body, health, nature, work, slow growth, the physical realm.</p>
+        </div>
+      </div>
+      <div class="tip-box"><p>✦ <strong>Court Cards</strong> (Page, Knight, Queen, King) in each suit represent either <em>people</em> in your life, or <em>aspects of yourself</em> you are currently embodying or being called to develop.</p></div>
+    </div>
+    <div class="g-card" style="background:rgba(13,6,24,.92);border-color:rgba(184,134,42,.3)">
+      <div class="suit-tabs">
+        <button class="suit-btn on" onclick="showSuit('wands')">🔥 Wands</button>
+        <button class="suit-btn" onclick="showSuit('cups')">💧 Cups</button>
+        <button class="suit-btn" onclick="showSuit('swords')">💨 Swords</button>
+        <button class="suit-btn" onclick="showSuit('pentacles')">🌍 Pentacles</button>
+        <button class="suit-btn" onclick="showSuit('court')">👑 Court Cards</button>
+      </div>
+      <div id="minorGrid" class="tarot-grid"></div>
+    </div>
+  </div>
+
+  <!-- ════════════════ HOW TO READ ════════════════ -->
+  <div class="section" id="tab-reading">
+    <div class="g-card">
+      <h2>How to Read Tarot</h2>
+      <h3>The Art Behind the Cards</h3>
+      <p>Reading tarot is not about predicting the future — it's about <strong>illuminating the present</strong> with such clarity that you can make wiser choices. The cards are a mirror. They reflect what is already known, deep down, in the intuitive body. Your job is to learn the language, then <em>trust what you see</em>.</p>
+      <div class="lore-box"><p>"The cards tell you nothing you don't already know. They simply hold it up to the light so you cannot look away." — A common saying in the tradition</p></div>
+    </div>
+
+    <div class="g-card">
+      <h3>Step-by-Step: A Reading Practice</h3>
+      <div id="stepsWrap"></div>
+    </div>
+
+    <div class="g-card">
+      <h2>Reading Reversals</h2>
+      <h3>When Cards Appear Upside Down</h3>
+      <p>A <strong>reversed card</strong> (upside-down) has several possible interpretations. Choose the one that resonates:</p>
+      <ul>
+        <li><strong>Blocked energy:</strong> The card's natural energy is being blocked, delayed, or resisted.</li>
+        <li><strong>Internalized:</strong> The energy is turning inward rather than expressing outward.</li>
+        <li><strong>Weakened:</strong> A milder version of the card's upright meaning.</li>
+        <li><strong>Shadow side:</strong> The darker, more challenging expression of the card's energy.</li>
+      </ul>
+      <div class="tip-box"><p>✦ <strong>Beginner's advice:</strong> You don't have to read reversals at first. Many excellent readers never do. If you choose to, be consistent — decide your approach before the reading and stick to it.</p></div>
+    </div>
+
+    <div class="g-card">
+      <h2>Developing Your Intuition</h2>
+      <h3>Going Beyond Memorization</h3>
+      <p>The biggest mistake new readers make is trying to memorize all 78 meanings before trusting themselves. Here is a better path:</p>
+      <ol>
+        <li style="margin-bottom:.5rem"><strong>Study one card a day.</strong> Pull a card each morning. Journal what you notice. Look at the image — what feeling does it evoke? What story does it tell? Write that down before you read any meaning.</li>
+        <li style="margin-bottom:.5rem"><strong>Notice the imagery first.</strong> Colors, symbols, body language, animals, landscape. The cards are picture books of the soul. The image knows what the intellect doesn't.</li>
+        <li style="margin-bottom:.5rem"><strong>Feel the suit.</strong> Before the card's number, identify its suit. Is this a Fire (Wands), Water (Cups), Air (Swords), or Earth (Pentacles) situation? That alone tells you half the story.</li>
+        <li style="margin-bottom:.5rem"><strong>Look at the number.</strong> Aces are beginnings. Twos are duality. Threes are growth. Fours are stability. Fives are conflict. Sixes are harmony. Sevens are challenge. Eights are movement. Nines are near-completion. Tens are endings and fullness.</li>
+        <li style="margin-bottom:.5rem"><strong>Weave a story across the spread.</strong> Don't read cards in isolation. Let each one speak to the others. Ask: what is the narrative across all these cards?</li>
+      </ol>
+      <div class="lore-box"><p>The goal is to get to a place where you pick up the deck and the words flow naturally — not from memory, but from a conversation you've been having for years with 78 companions.</p></div>
+    </div>
+
+    <div class="g-card">
+      <h2>Ritual Before a Reading</h2>
+      <h3>Preparing the Sacred Space</h3>
+      <p>A tarot reading is a ritual act. How you prepare matters.</p>
+      <ul>
+        <li>🕯️ <strong>Light a candle.</strong> Even one small candle signals to your psyche: <em>sacred time has begun.</em></li>
+        <li>🌿 <strong>Clear the deck.</strong> Knock on the deck three times, or shuffle with intention. Visualize clearing any previous energy.</li>
+        <li>🧘 <strong>Ground yourself.</strong> Three deep breaths, feet flat on the floor. Feel your weight. Come fully present.</li>
+        <li>❓ <strong>Form your question clearly.</strong> Vague questions yield vague answers. The more specific and honest your question, the more useful the reading.</li>
+        <li>📖 <strong>Journal afterward.</strong> Write down the cards, your reading, your feelings. Patterns reveal themselves over months of entries.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════ SPREADS ════════════════ -->
+  <div class="section" id="tab-spreads">
+    <div class="g-card">
+      <h2>Tarot Spreads</h2>
+      <h3>Layouts That Shape Your Reading</h3>
+      <p>A <strong>spread</strong> is the pattern in which you lay out cards, with each position in the pattern representing a different aspect of your question. The spread gives your reading structure — like a constellation that holds different stars in meaningful relationship.</p>
+      <p style="margin-top:.5rem; font-size:.9rem; color:var(--text-soft)">Click any spread to see its positions and how to use it.</p>
+    </div>
+    <div id="spreadsWrap"></div>
+  </div>
+
+</div><!-- /shell -->
+
+<script>
+// ════════ TOGGLE HELPERS ════════
+function toggle(el, bodyClass) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.'+bodyClass).forEach(b=>{b.classList.remove('open');b.previousElementSibling&&b.previousElementSibling.classList&&b.previousElementSibling.classList.remove('open');});
+  document.querySelectorAll('[data-toggle="'+bodyClass+'"]').forEach(c=>c.classList.remove('open'));
+  if(!isOpen){ el.classList.add('open'); }
+}
+
+function showTab(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById('tab-'+id).classList.add('on');
+  event.currentTarget.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ════════ SABBATS ════════
+const SABBATS = [
+  {name:'Yule',date:'Dec 21',emoji:'🌿',season:'Winter Solstice',
+   essence:'The longest, darkest night — and the birth of the returning light. In the womb of absolute darkness, the Sun God is reborn from the Crone Goddess. Every light you kindle on this night is an act of defiance and faith.',
+   magic:'Burning a Yule log for luck and protection. Decorating with evergreens (life eternal). Candlelit vigils through the longest night. Sun-wheel crafting.',
+   focus:'Rebirth, hope, stillness, the eternal return. Letting the dark be complete before seeking the light.',
+   herbs:'Holly, ivy, mistletoe, fir, frankincense, cinnamon',
+   colors:'Deep red, forest green, gold, white, midnight blue'},
+  {name:'Imbolc',date:'Feb 1–2',emoji:'🕯️',season:'Cross-Quarter — Early Spring',
+   essence:'The first spark in the darkness. Brigid, goddess of hearth, poetry, and healing, returns to kindle the sacred flame. Under frozen ground, seeds begin to stir. This is the Sabbat of potential, purification, and creative fire.',
+   magic:'Making Brigid\'s crosses from rushes. Creating a Bride\'s Bed. Lighting every candle to honor returning light. Seed planting (symbolic or literal). Dedications and initiations.',
+   focus:'New beginnings, purification, creative inspiration, the first stirrings after a long winter.',
+   herbs:'Snowdrop, angelica, basil, cinnamon, red clover',
+   colors:'White, red, orange, gold'},
+  {name:'Ostara',date:'Mar 20',emoji:'🌸',season:'Spring Equinox',
+   essence:'Day and night stand equal. The Goddess in her radiant Maiden aspect awakens alongside the young, playful God. Eggs, seeds, and flowers are sacred here — all of them carrying the promise of something not yet realized.',
+   magic:'Dyeing eggs with natural plant dyes. Planting seeds (perfect for New Year intentions). Making flower waters. Egg divination. Creating a spring altar.',
+   focus:'Balance, renewal, fertility, joy, fresh beginnings, the sacred feminine awakening.',
+   herbs:'Jasmine, violet, honeysuckle, daffodil, birch',
+   colors:'Yellow, light green, lavender, pink, sky blue'},
+  {name:'Beltane',date:'May 1',emoji:'🔥',season:'Cross-Quarter — High Spring',
+   essence:'The most passionate Sabbat. The God and Goddess unite in sacred marriage; the earth explodes into fertility. The veil is thin — as thin as Samhain, but lit with fire instead of shadow. Life forces burn at their peak. This is the night of the Maypole, the bonfire, and the sacred coupling.',
+   magic:'Leaping bonfires for purification and luck. Maypole ribbon weaving. Gathering morning dew (it has healing power). Flower crown making. May Day baskets. Fire scrying.',
+   focus:'Passion, fertility, sacred union, creativity, the thinning veil, life at its most abundant.',
+   herbs:'Hawthorn, rose, mint, lilac, rowan',
+   colors:'Green, white, red, gold'},
+  {name:'Litha',date:'Jun 20–21',emoji:'☀️',season:'Summer Solstice',
+   essence:'The longest day. The Sun God stands at the peak of his power — triumphant, radiant, and already beginning his descent. The Oak King gives way to the Holly King. The Goddess is in full Mother aspect, presiding over abundant earth. Everything is at maximum expression.',
+   magic:'Midsummer bonfires (leaping, fire divination). Gathering herbs at noon when potency is highest. Sun water. Flower crowns in water. Fae magic (the veil to the fae realm is thin here too).',
+   focus:'The peak of power, abundance, vitality, courage, the full expression of self before the turning.',
+   herbs:'St. John\'s Wort, chamomile, fennel, lavender, vervain',
+   colors:'Gold, yellow, orange, sun-bleached white'},
+  {name:'Lughnasadh',date:'Aug 1',emoji:'🌾',season:'Cross-Quarter — First Harvest',
+   essence:'Lugh\'s festival of the first grain harvest. The God willingly sacrifices himself — his body becomes the bread that feeds the people. A time of profound gratitude, abundance, and the bittersweet recognition that what nourishes us also demands our giving. The first whispers of the great letting-go.',
+   magic:'Baking bread as ritual (offering the first loaf to the earth). Corn dolly making. Weaving spells for abundance. Fruit and grain offerings at crossroads. Counting your harvests — literal and metaphorical.',
+   focus:'Gratitude, abundance, sacrifice, the beginning of letting go, honoring what has been earned.',
+   herbs:'Wheat, sunflower, heather, meadowsweet, corn',
+   colors:'Gold, amber, brown, orange, green'},
+  {name:'Mabon',date:'Sep 22',emoji:'🍂',season:'Autumn Equinox',
+   essence:'The Second Harvest and pagan Thanksgiving. Day and night balance — for the last time before the dark prevails. The God descends to the Underworld; the Goddess becomes the Crone of sorrow and wisdom. A time of deep gratitude for what has been, and equally deep release of what must go.',
+   magic:'Apple magic (apples are the sacred fruit of the Otherworld). Leaf and acorn divination. Balance rituals (two equal candles, two lists). Wine and cider libations. Releasing ceremonies.',
+   focus:'Balance, gratitude, release, preparation, honoring endings as gracefully as beginnings.',
+   herbs:'Apple, hazel, blackberry, marigold, sage',
+   colors:'Orange, red, gold, brown, deep purple'},
+  {name:'Samhain',date:'Oct 31–Nov 1',emoji:'🕯️',season:'Cross-Quarter — High Autumn',
+   essence:'The Witch\'s New Year. The most sacred night. The veil between worlds is thinner than at any other time — thinner than Beltane, because now we cross in darkness rather than light. The dead walk. Ancestors speak. The Crone rules. It is not a night to fear — it is a night to listen, to grieve, and to honor the great cycle of death that makes rebirth possible.',
+   magic:'Dumb supper (silent ancestor meal). Spirit lanterns (carved pumpkins/turnips). Ancestor altars. Mirror and water scrying. Apple peel divination. Bone readings. Offerings at the threshold for wandering dead.',
+   focus:'Ancestors, death, transformation, shadow work, divination, honoring the beloved dead, the sacred dark.',
+   herbs:'Mugwort, dittany of Crete, rosemary (for remembrance), apple, myrrh',
+   colors:'Black, orange, deep red, silver, bone white'},
+];
+
+const sabbatWrap = document.getElementById('sabbatWrap');
+SABBATS.forEach((s,i) => {
+  const div = document.createElement('div');
+  div.className = 'sabbat-card';
+  div.innerHTML = `
+    <div class="sc-top">
+      <span class="sc-emoji">${s.emoji}</span>
+      <div>
+        <div class="sc-name">${s.name}</div>
+        <div class="sc-date">${s.date} · ${s.season}</div>
+      </div>
+    </div>
+    <div class="sc-body" id="sb-${i}">
+      <p>${s.essence}</p>
+      <h5>✦ Magic & Ritual</h5><p>${s.magic}</p>
+      <h5>☽ Focus & Intention</h5><p>${s.focus}</p>
+      <h5>🌿 Herbs · Colors</h5><p><strong>Herbs:</strong> ${s.herbs}<br><strong>Colors:</strong> ${s.colors}</p>
+    </div>
+    <div class="flip-hint">click to reveal</div>`;
+  div.onclick = () => {
+    const body = document.getElementById(`sb-${i}`);
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.sc-body').forEach(b=>b.classList.remove('open'));
+    document.querySelectorAll('.sabbat-card').forEach(c=>c.classList.remove('open'));
+    if(!isOpen){ body.classList.add('open'); div.classList.add('open'); }
+  };
+  sabbatWrap.appendChild(div);
+});
+
+// ════════ MOON PHASES ════════
+const MOON_PHASES = [
+  {glyph:'🌑',name:'New Moon',
+   desc:'Complete darkness — the womb of potential. The moon is invisible; we are at the threshold of a new cycle. This is the most potent time for <strong>setting intentions</strong>. What do you wish to call into being? Plant your seeds here, in the dark, where all life begins.',
+   magic:'Set intentions. Begin new projects. Plant seeds (literal and metaphorical). Create vision boards. Begin spells for attraction and manifestation.',
+   avoid:'Release work, banishing, endings.'},
+  {glyph:'🌒',name:'Waxing Crescent',
+   desc:'The first sliver of light appears. Seeds have been planted; now the first tender shoots push upward. This is the time to <strong>take first action</strong> toward your new moon intentions. Build momentum.',
+   magic:'Take first steps. Gather resources. Affirmations. Draw things toward you. Build confidence.',
+   avoid:'Major decisions; the energy is still fragile.'},
+  {glyph:'🌓',name:'First Quarter',
+   desc:'Half light, half dark — a moment of decision and challenge. Your intentions are growing but meeting resistance. This is the moon of <strong>commitment and course correction</strong>. Push through obstacles with intention.',
+   magic:'Courage spells. Problem solving. Commitment rituals. Overcoming obstacles.',
+   avoid:'Giving up — this is the crisis before the breakthrough.'},
+  {glyph:'🌔',name:'Waxing Gibbous',
+   desc:'Almost full — energy building toward its peak. The harvest is nearly ready. This is the time to <strong>refine and perfect</strong>, to tend your intentions with attention and faith. The momentum is powerful.',
+   magic:'Refinement. Attraction spells at high potency. Healing work. Drawing abundance and love.',
+   avoid:'Starting entirely new things; focus on what\'s already building.'},
+  {glyph:'🌕',name:'Full Moon',
+   desc:'Maximum illumination — the moon\'s peak power. What was planted at the new moon has fully manifested in the light, or been revealed for what it truly is. The Full Moon <strong>amplifies everything</strong> — magic, emotion, intuition, and truth. Work with its energy, not against it.',
+   magic:'Charging crystals, tools, water. Gratitude rituals. Celebration. Divination. Any spell at maximum power. Esbat rituals.',
+   avoid:'Nothing is avoided here — but know that suppressed emotions will surface.'},
+  {glyph:'🌖',name:'Waning Gibbous',
+   desc:'The light begins its retreat. The full moon has shown you truth; now it\'s time to <strong>integrate and release</strong> what was revealed. A time of wisdom and the first letting go.',
+   magic:'Gratitude work. Integration. Beginning gentle release. Sharing wisdom. Giving back.',
+   avoid:'Big new beginnings; the energy is turning inward.'},
+  {glyph:'🌗',name:'Last Quarter',
+   desc:'Half light again, but now in retreat. The mirror of First Quarter — instead of committing forward, we commit to <strong>releasing what no longer serves</strong>. Forgiveness. Clearing. Cutting cords.',
+   magic:'Banishing. Cord cutting. Forgiveness rituals. Clearing old patterns. Releasing bad habits.',
+   avoid:'Attracting or beginning new things.'},
+  {glyph:'🌘',name:'Waning Crescent',
+   desc:'The final sliver before the dark — the oldest, most tired, most wise phase. The Crone\'s moon. This is the time for <strong>deep rest, shadow work, and surrender</strong>. Let go completely. Trust the void before the new cycle begins.',
+   magic:'Shadow work. Deep meditation. Ancestor communication. Surrendering control. Preparing for the new cycle.',
+   avoid:'Forcing action; this moon asks for rest and release.'},
+];
+
+const moonRow = document.getElementById('moonRow');
+MOON_PHASES.forEach((p,i)=>{
+  const div = document.createElement('div');
+  div.className = 'moon-phase';
+  div.innerHTML = `
+    <div class="mp-glyph">${p.glyph}</div>
+    <div class="mp-name">${p.name}</div>
+    <div class="mp-body" id="mp-${i}">
+      <p>${p.desc}</p>
+      <div style="margin-top:.5rem"><strong style="font-size:.72rem;font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;font-variant:small-caps;letter-spacing:.07em;color:var(--gold-pale)">WORK WITH IT:</strong> <span>${p.magic}</span></div>
+    </div>`;
+  div.onclick=()=>{
+    const body=document.getElementById(`mp-${i}`);
+    const isOpen=body.classList.contains('open');
+    document.querySelectorAll('.mp-body').forEach(b=>b.classList.remove('open'));
+    document.querySelectorAll('.moon-phase').forEach(m=>m.classList.remove('open'));
+    if(!isOpen){body.classList.add('open');div.classList.add('open');}
+  };
+  moonRow.appendChild(div);
+});
+
+// ════════ MAJOR ARCANA ════════
+const MAJOR = [
+  {num:'0',name:'The Fool',g:'🌀',kw:['Beginnings','Innocence','Leap of faith','Freedom'],
+   up:'A sacred new beginning. The Fool steps off the cliff with pure trust — not naivety, but the holy courage to begin without knowing the outcome. New journey, spontaneous action, embracing the unknown.',
+   rev:'Recklessness, fear of beginning, naivety without wisdom, holding back out of fear.',
+   cycle:'Associated with Spring — the Wheel\'s new turning, Ostara\'s fresh energy.'},
+  {num:'I',name:'The Magician',g:'✦',kw:['Willpower','Creation','Skill','Manifestation'],
+   up:'All four elements on the altar before you — you have everything you need. The Magician channels divine will through skilled action. "As above, so below." Your focused intention creates real change.',
+   rev:'Manipulation, untapped potential, misusing power, feeling powerless when you are not.',
+   cycle:'Imbolc energy — the tools are laid out, the fire is lit, the work begins.'},
+  {num:'II',name:'High Priestess',g:'🌙',kw:['Intuition','Mystery','Inner knowing','The unconscious'],
+   up:'The veil between worlds. What you seek cannot be grasped with the rational mind — only felt, dreamed, sensed. The High Priestess says: go inward. Trust the knowing in your body. Not yet time to act.',
+   rev:'Ignoring intuition, secrets revealed, blocked psychic ability, disconnection from inner self.',
+   cycle:'New Moon energy — the dark that holds all possibility.'},
+  {num:'III',name:'The Empress',g:'🌿',kw:['Abundance','Fertility','Nature','Nurturing'],
+   up:'The Great Mother in full bloom. Earth itself — abundant, generous, sensual, creative. She reminds you that you are a body, and bodies deserve pleasure, nourishment, and beauty. Pregnancy, creative projects, abundance in all forms.',
+   rev:'Creative block, neglecting self-care, dependence, smothering love.',
+   cycle:'Beltane and the full green of late spring. The Goddess in her fullest Mother aspect.'},
+  {num:'IV',name:'The Emperor',g:'🏛️',kw:['Structure','Authority','Stability','Fatherhood'],
+   up:'Sacred masculine structure — not domination, but the loving stability that makes growth possible. Boundaries, discipline, creating systems. A time for leadership, taking authority in your own life, building something that lasts.',
+   rev:'Rigidity, authoritarianism, abuse of power, or conversely, inability to create structure.',
+   cycle:'Litha — the Sun God at the height of his ordered, solar power.'},
+  {num:'V',name:'The Hierophant',g:'⚜️',kw:['Tradition','Spiritual guidance','Institution','Initiation'],
+   up:'The teacher, the priest, the tradition. Spiritual guidance through established wisdom. Initiation into a path or community. This may indicate working within an institution, or seeking a teacher/mentor.',
+   rev:'Rigid dogma, questioning tradition, breaking rules with wisdom, spiritual rebellion.',
+   cycle:'The gateway of initiation — the threshold crossed at each Sabbat.'},
+  {num:'VI',name:'The Lovers',g:'♾️',kw:['Choice','Union','Values','Sacred partnership'],
+   up:'Not only romantic love — primarily, a sacred <em>choice</em> that aligns with your deepest values. The Lovers asks: which path truly reflects who you are? Union, alignment, authentic relationship, choosing love over fear.',
+   rev:'Misalignment of values, difficult choice, fear of commitment, internal discord.',
+   cycle:'Beltane — the sacred union of the God and Goddess, the Great Rite.'},
+  {num:'VII',name:'The Chariot',g:'⚔️',kw:['Victory','Willpower','Control','Direction'],
+   up:'Triumph through focused will. The Chariot is pulled by opposing forces — the victory is not in overpowering them but in <em>directing</em> them. You are moving forward. Confidence, momentum, discipline, drive.',
+   rev:'Lack of direction, aggression, feeling out of control, forcing rather than guiding.',
+   cycle:'Midsummer momentum — the surge of solar energy toward the solstice peak.'},
+  {num:'VIII',name:'Strength',g:'🦁',kw:['Courage','Patience','Compassion','Inner power'],
+   up:'The woman who tames the lion with her bare hands — not through force, but through love, patience, and quiet confidence. This is the card of <em>gentle power</em>. You are stronger than you know. Face what frightens you with compassion, not force.',
+   rev:'Self-doubt, fear, raw uncontrolled power, using force where softness was needed.',
+   cycle:'The Goddess\'s taming of the wild — present at Lammas when she holds the harvest.'},
+  {num:'IX',name:'The Hermit',g:'🕯️',kw:['Solitude','Inner guidance','Withdrawal','Wisdom'],
+   up:'The lamp-bearer who walks alone to find what cannot be found in company. A time for solitude, introspection, and seeking your own inner light. The Hermit does not withdraw from loneliness — but from a need to know truth at its source.',
+   rev:'Isolation, refusing guidance, excessive withdrawal, feeling lost in the dark.',
+   cycle:'Samhain — the turning inward, the descent, the long dark vigil.'},
+  {num:'X',name:'Wheel of Fortune',g:'☸️',kw:['Cycles','Fate','Turning point','Luck'],
+   up:'The great wheel turns — and you are on it. A turning point, a shift in fortune, the recognition that life moves in cycles. This may be a lucky upswing or simply a needed change. Align with the cycle rather than resisting it.',
+   rev:'Resistance to change, bad luck, feeling like a victim of fate, clinging to what\'s ending.',
+   cycle:'The Wheel itself — the very essence of all eight Sabbats.'},
+  {num:'XI',name:'Justice',g:'⚖️',kw:['Truth','Fairness','Cause & effect','Accountability'],
+   up:'The scales that never lie. A moment of reckoning and clarity — you will receive exactly what you have given. Legal matters, truth-telling, fairness, taking responsibility. This is not punishment; it is <em>alignment</em>.',
+   rev:'Unfairness, dishonesty, avoiding accountability, imbalance, legal complications.',
+   cycle:'Mabon — the perfect balance of day and night, the harvest of what was sown.'},
+  {num:'XII',name:'The Hanged One',g:'🙃',kw:['Surrender','New perspective','Pause','Sacrifice'],
+   up:'Odin hung on the World Tree for nine days — not in defeat, but in sacred surrender — and gained the runes. The Hanged One invites you to stop fighting and see differently. What appears as loss may be an initiation.',
+   rev:'Martyrdom, stalling, avoiding necessary surrender, clinging to control.',
+   cycle:'The liminal moment between Mabon and Samhain — suspended between worlds.'},
+  {num:'XIII',name:'Death',g:'🥀',kw:['Transformation','Endings','Transition','Release'],
+   up:'Not physical death — but the most profound transformation. Something is ending so that something new can be born. Resistance makes this harder; surrender makes it sacred. Death in tarot is a gift: the old skin must be shed.',
+   rev:'Resistance to change, stagnation, fear of endings, incomplete transformation.',
+   cycle:'Samhain — the sacred death at the Wheel\'s dark apex.'},
+  {num:'XIV',name:'Temperance',g:'🌊',kw:['Balance','Patience','Integration','Alchemy'],
+   up:'The angel who pours water between two cups without spilling a drop. Alchemy, balance, the blending of opposites into something greater. A time for patience, moderation, healing, and the creation of something new from disparate elements.',
+   rev:'Excess, imbalance, haste, lack of long-term vision.',
+   cycle:'The cross-quarter days — when the year\'s opposing forces find their midpoint.'},
+  {num:'XV',name:'The Devil',g:'⛓️',kw:['Shadow','Bondage','Materialism','Shadow self'],
+   up:'The chains that bind — and the chains that you chose. The Devil shows us our addictions, obsessions, and shadow patterns. But look closely at the figures: their chains are loose. They stay because they believe they cannot leave. Shadow work begins here.',
+   rev:'Breaking free, releasing unhealthy bonds, reclaiming shadow, beginning recovery.',
+   cycle:'The deep dark of late autumn — the shadow you must face before Yule\'s rebirth.'},
+  {num:'XVI',name:'The Tower',g:'⚡',kw:['Sudden change','Revelation','Collapse','Liberation'],
+   up:'The lightning-struck tower that must fall. What was built on false foundations crumbles suddenly, dramatically. This is terrifying — and necessary. The Tower does not destroy what is true. It only destroys what was never solid to begin with.',
+   rev:'Avoiding inevitable change, drawn-out collapse, fear of the tower moment.',
+   cycle:'The eclipse — sudden celestial disruption that precedes new clarity.'},
+  {num:'XVII',name:'The Star',g:'⭐',kw:['Hope','Healing','Renewal','Divine trust'],
+   up:'After the Tower falls, the Star rises. The woman kneels naked at the water, pouring freely from two vessels — there is enough, there is always more. Hope, healing, inspiration, faith in the universe\'s goodness. A profound blessing.',
+   rev:'Despair, lost faith, hopelessness, disconnection from divine support.',
+   cycle:'Imbolc — the first star of hope in the winter dark, Brigid\'s flame.'},
+  {num:'XVIII',name:'The Moon',g:'🌕',kw:['Illusion','Fear','Intuition','The unconscious'],
+   up:'The moon illuminates the path — but the path is strange, and the shadows shift. This is the card of the deep unconscious, of dreams and fears, of things not yet clear. Trust your intuition but do not yet act. Something is not what it seems.',
+   rev:'Clarity beginning to emerge, releasing fear, truth surfacing from confusion.',
+   cycle:'The dark of the moon — the liminal space between the known and unknown.'},
+  {num:'XIX',name:'The Sun',g:'☀️',kw:['Joy','Vitality','Success','Clarity'],
+   up:'Pure radiance. The Sun is the most joyful, unambiguous card in the deck. Success, happiness, vitality, clarity, playfulness, warmth. Everything is illuminated. This is one of the great blessings in tarot — receive it fully.',
+   rev:'Dimmed optimism, temporary setbacks, arrogance, difficulty finding joy.',
+   cycle:'Litha — the Sun God at his absolute peak, the longest day.'},
+  {num:'XX',name:'Judgement',g:'📯',kw:['Awakening','Reckoning','Resurrection','Calling'],
+   up:'The trumpet calls and the dead rise — not literally, but the deeper self awakens and answers. A calling, a spiritual awakening, a moment of profound evaluation and forgiveness. You are being summoned to your higher purpose.',
+   rev:'Ignoring the calling, self-doubt, refusing awakening, not forgiving yourself or others.',
+   cycle:'Samhain — when the boundary dissolves and the soul is called to account.'},
+  {num:'XXI',name:'The World',g:'🌍',kw:['Completion','Wholeness','Integration','Mastery'],
+   up:'The triumphant completion of the Fool\'s Journey. A cycle is fully complete — celebrate it fully before the next Fool\'s step. You have integrated the lessons of this journey. Wholeness, mastery, fulfillment, the end that is also the beginning.',
+   rev:'Incompletion, loose ends, not fully inhabiting your success.',
+   cycle:'The year\'s completion — the moment before Yule resets everything.'},
+];
+
+const majorGrid = document.getElementById('majorGrid');
+MAJOR.forEach((c,i)=>{
+  const div=document.createElement('div');
+  div.className='t-card';
+  div.innerHTML=`
+    <div class="tc-num">${c.num}</div>
+    <div class="tc-glyph">${c.g}</div>
+    <div class="tc-name">${c.name}</div>
+    <div class="tc-body" id="tc-m-${i}">
+      <div class="tc-kw">${c.kw.map(k=>`<span>${k}</span>`).join('')}</div>
+      <h5>✦ Upright</h5><p>${c.up}</p>
+      <h5>↕ Reversed</h5><p>${c.rev}</p>
+      <h5>☽ Wheel Connection</h5><p>${c.cycle}</p>
+    </div>`;
+  div.onclick=()=>{
+    const body=document.getElementById(`tc-m-${i}`);
+    const isOpen=body.classList.contains('open');
+    document.querySelectorAll('.tc-body').forEach(b=>b.classList.remove('open'));
+    document.querySelectorAll('.t-card').forEach(c=>c.classList.remove('open'));
+    if(!isOpen){body.classList.add('open');div.classList.add('open');}
+  };
+  majorGrid.appendChild(div);
+});
+
+// ════════ MINOR ARCANA ════════
+const MINOR_DATA = {
+  wands:[
+    {num:'Ace',name:'Ace of Wands',g:'🔥',kw:['New creative spark','Inspiration','Potential','Birth of passion'],up:'A divine spark of creative fire. New business, project, or passion is ignited. The universe hands you the torch — will you run with it?',rev:'Delayed start, creative block, false starts, uninspired energy.'},
+    {num:'2',name:'Two of Wands',g:'🌍',kw:['Planning','Vision','Future','Bold decisions'],up:'Standing at the threshold with the world in your hands. Planning your next great venture with confidence. Waiting is part of the power.',rev:'Fear of the unknown, lack of planning, impatience.'},
+    {num:'3',name:'Three of Wands',g:'⛵',kw:['Expansion','Waiting for results','Foresight','Progress'],up:'Your ships have sailed — now you wait for them to return. Expansion is happening. Progress made. Long-term vision paying off.',rev:'Delays, unexpected setbacks, lack of foresight.'},
+    {num:'4',name:'Four of Wands',g:'🎉',kw:['Celebration','Community','Homecoming','Harmony'],up:'Pure joy and celebration. A milestone reached. Community, family reunion, the sweetness of shared victory. One of the most joyful cards.',rev:'Lack of harmony at home, delayed celebration, personal disharmony.'},
+    {num:'5',name:'Five of Wands',g:'⚔️',kw:['Conflict','Competition','Chaos','Disagreement'],up:'Everyone fighting for position — or a lively creative clash of ideas. Conflict, competition, chaos. May signal productive creative tension or petty conflict.',rev:'Avoiding conflict, inner turmoil, competition becomes productive.'},
+    {num:'6',name:'Six of Wands',g:'🏆',kw:['Victory','Public recognition','Success','Leadership'],up:'Riding in triumph. Recognition for your efforts. Leadership, public success, the crowd cheering. A well-earned victory moment.',rev:'Ego, fall from grace, delayed recognition, seeking validation.'},
+    {num:'7',name:'Seven of Wands',g:'🛡️',kw:['Defense','Perseverance','Standing ground','Conviction'],up:'You are outnumbered but holding your position. Stand your ground. Your position is worth defending. Courage under pressure.',rev:'Giving up, overwhelmed, wavering conviction.'},
+    {num:'8',name:'Eight of Wands',g:'💨',kw:['Speed','Movement','News','Rapid progress'],up:'Eight wands flying through the air — swift movement, fast news, rapid progression. Things are moving quickly now. Act without hesitation.',rev:'Delays, miscommunication, slow progress, haste and chaos.'},
+    {num:'9',name:'Nine of Wands',g:'🤕',kw:['Resilience','Last stand','Perseverance','Boundaries'],up:'Battered but unbroken. You\'ve been through much and have one final push. You are more resilient than you know. Defend your boundaries.',rev:'Paranoia, stubbornness, not knowing when to rest.'},
+    {num:'10',name:'Ten of Wands',g:'😓',kw:['Burden','Overcommitment','Struggle','Completion'],up:'Carrying too many responsibilities. You\'re almost there but exhausted. Time to delegate, let go, or reassess your load. The finish line is near.',rev:'Releasing burdens, refusing responsibility, lightening the load.'},
+  ],
+  cups:[
+    {num:'Ace',name:'Ace of Cups',g:'💧',kw:['New love','Emotional beginning','Intuition','Spiritual opening'],up:'The overflowing cup — pure emotional potential, new love, spiritual opening, creative inspiration arising from feeling. The heart opens.',rev:'Blocked emotions, emotional withdrawal, unexpressed feelings.'},
+    {num:'2',name:'Two of Cups',g:'🥂',kw:['Partnership','Mutual attraction','Connection','Union'],up:'Two people meeting in genuine recognition. Romantic connection, strong partnership, mutual respect and attraction. A beautiful union of any kind.',rev:'Imbalanced relationship, disconnection, broken bond.'},
+    {num:'3',name:'Three of Cups',g:'🎊',kw:['Friendship','Celebration','Reunion','Community'],up:'Three friends dancing with raised cups. Sisterhood, celebration, joyful community, reunion. A time of social connection and shared happiness.',rev:'Overindulgence, gossip, cliques, isolation from community.'},
+    {num:'4',name:'Four of Cups',g:'😑',kw:['Apathy','Contemplation','Reevaluation','Withdrawal'],up:'A figure sits with arms crossed as a cup is offered from a cloud — and ignored. Boredom, apathy, missing what is being offered. Sometimes necessary introspection; sometimes ingratitude.',rev:'Emerging from apathy, seeing new opportunities, waking up.'},
+    {num:'5',name:'Five of Cups',g:'😢',kw:['Loss','Grief','Regret','Disappointment'],up:'Mourning over spilled cups — but two still stand behind. Grief and loss are real and must be honored. But look behind you — not all is lost.',rev:'Forgiveness, moving past grief, healing, recovery.'},
+    {num:'6',name:'Six of Cups',g:'🌻',kw:['Nostalgia','Childhood','Innocence','Happy memories'],up:'The sweetness of the past. Nostalgia, happy memories, the innocence of childhood. A gift freely given. May indicate past returning or a childlike joy available now.',rev:'Living in the past, refusing to grow, toxic nostalgia.'},
+    {num:'7',name:'Seven of Cups',g:'✨',kw:['Fantasy','Choices','Illusion','Wishful thinking'],up:'Seven cups of dreams float in the clouds — one holds a snake, one a castle, one a dragon. Which cup is real? Choices, fantasies, illusions. Discernment is needed.',rev:'Clarity emerging, making a firm choice, cutting through illusion.'},
+    {num:'8',name:'Eight of Cups',g:'🌒',kw:['Walking away','Disillusionment','Seeking meaning','Release'],up:'Leaving cups behind under a dark moon to find something more meaningful. Walking away from what no longer nourishes. Brave, necessary abandonment.',rev:'Staying when you should leave, avoidance, fear of abandonment.'},
+    {num:'9',name:'Nine of Cups',g:'😊',kw:['Contentment','Satisfaction','Wishes granted','Pleasure'],up:'The Wish Card. Satisfaction, emotional fulfillment, dreams coming true. Physical and emotional comfort. A moment of genuine contentment. Enjoy it.',rev:'Greed, overindulgence, superficial satisfaction, unfulfilled wishes.'},
+    {num:'10',name:'Ten of Cups',g:'🌈',kw:['Bliss','Family','Harmony','Emotional completion'],up:'The rainbow family, arms raised in joy. Complete emotional fulfillment. Harmony in family, deep love, lasting happiness. One of the greatest blessings.',rev:'Broken home, disharmony, illusion of perfection, unhappy family.'},
+  ],
+  swords:[
+    {num:'Ace',name:'Ace of Swords',g:'⚔️',kw:['Truth','Clarity','Breakthrough','New idea'],up:'A sword of pure clarity cuts through confusion. Breakthrough, truth, a new idea or perspective that cannot be unseen. The mind awakens.',rev:'Confusion, clouded thinking, a truth not yet ready to emerge.'},
+    {num:'2',name:'Two of Swords',g:'🙈',kw:['Stalemate','Avoidance','Indecision','Truce'],up:'Blindfolded, swords crossed before the heart. Refusing to look. A stalemate or deliberate avoidance of a difficult truth. The decision must be made.',rev:'Indecision lifting, information emerging, releasing avoidance.'},
+    {num:'3',name:'Three of Swords',g:'💔',kw:['Heartbreak','Grief','Sorrow','Truth hurts'],up:'Three swords pierce the heart. Heartbreak, loss, painful truth. This grief is real and must be felt. There is no bypassing the Three of Swords — only moving through it.',rev:'Healing, recovery from heartbreak, releasing grief.'},
+    {num:'4',name:'Four of Swords',g:'😴',kw:['Rest','Recovery','Contemplation','Strategic pause'],up:'A knight lies in repose. After battle, rest is not laziness — it\'s strategic. Retreat, recovery, meditation, needed pause. The sword rests so the warrior can return stronger.',rev:'Restlessness, forced to rest, returning to action too soon.'},
+    {num:'5',name:'Five of Swords',g:'😈',kw:['Conflict','Defeat','Ego','Hollow victory'],up:'A figure collects swords from the defeated — but looks back with discomfort. A pyrrhic victory. Someone won, but at what cost? Conflict with real damage, ego battles.',rev:'Resolution of conflict, moving past defeat, releasing win/lose thinking.'},
+    {num:'6',name:'Six of Swords',g:'⛵',kw:['Moving on','Transition','Recovery','Calmer waters'],up:'A boat carries passengers away from turbulent water into calm. Transition, moving on from difficulty. The worst is behind you. The journey is not over, but the storm has passed.',rev:'Stuck in trouble, unable to move on, returning to difficulty.'},
+    {num:'7',name:'Seven of Swords',g:'🤫',kw:['Deception','Strategy','Evasion','Getting away with something'],up:'A figure sneaks away with armfuls of swords. Deception — of self or others. Strategic evasion. Keeping a secret. Someone may not be honest with you, or you with them.',rev:'Coming clean, being caught, releasing deception.'},
+    {num:'8',name:'Eight of Swords',g:'🔒',kw:['Restriction','Self-imprisonment','Victim mentality','Trapped'],up:'A figure bound and blindfolded, surrounded by swords — but the ropes are loose, the gap is open. The prison is the mind. You are less trapped than you believe.',rev:'Release, seeing clearly, freeing yourself from mental imprisonment.'},
+    {num:'9',name:'Nine of Swords',g:'😰',kw:['Anxiety','Nightmares','Despair','Catastrophizing'],up:'Sitting up at 3am with nine swords on the wall, head in hands. Anxiety, nightmares, the darkness of the small hours. Most often about what we fear, not what is actually happening.',rev:'Hope emerging, anxiety beginning to lift, seeking help.'},
+    {num:'10',name:'Ten of Swords',g:'🗡️',kw:['Betrayal','Rock bottom','Ending','Painful defeat'],up:'Ten swords in the back — the worst has happened. But the sun rises at the horizon. Rock bottom is complete. When we hit the bottom, the only direction is up.',rev:'Recovery beginning, refusing to be a victim, gradual healing.'},
+  ],
+  pentacles:[
+    {num:'Ace',name:'Ace of Pentacles',g:'🪙',kw:['New financial opportunity','Material gift','Grounding','Manifestation'],up:'A golden coin held out from the clouds — material opportunity offered. New job, financial windfall, the seed of abundance. Plant it wisely.',rev:'Missed opportunity, poor planning, financial setback.'},
+    {num:'2',name:'Two of Pentacles',g:'♾️',kw:['Balance','Adaptability','Juggling priorities','Flux'],up:'Juggling two coins in a figure-eight — life\'s constant balancing act. Managing multiple responsibilities with grace. Financial fluctuation. Keep adapting.',rev:'Imbalance, dropping the ball, overwhelmed by responsibilities.'},
+    {num:'3',name:'Three of Pentacles',g:'🏛️',kw:['Teamwork','Mastery','Collaboration','Craft'],up:'The master craftsperson consulting with others. Skilled collaboration, working with experts, the early stages of building something excellent together.',rev:'Lack of teamwork, poor quality work, not valuing others\' skills.'},
+    {num:'4',name:'Four of Pentacles',g:'💰',kw:['Security','Hoarding','Control','Stability'],up:'Clinging tightly to coins. Financial security — but also miserliness, fear of loss, hoarding. The security is real, but so is the fear beneath it.',rev:'Releasing control, generosity, financial insecurity.'},
+    {num:'5',name:'Five of Pentacles',g:'❄️',kw:['Hardship','Poverty','Exclusion','Hard times'],up:'Two figures in snow outside a lit window. Material hardship, feeling excluded, poverty of spirit or finances. Help is available — but it must be sought. You are not as alone as you feel.',rev:'Recovery, assistance arrives, faith restored.'},
+    {num:'6',name:'Six of Pentacles',g:'⚖️',kw:['Generosity','Charity','Giving and receiving','Balance of wealth'],up:'A merchant distributing coins. The flow of abundance — giving and receiving in balance. Generosity, charity, or being on the receiving end. Abundance circulates.',rev:'Strings attached, power imbalance in giving, debt.'},
+    {num:'7',name:'Seven of Pentacles',g:'🌱',kw:['Patience','Investment','Waiting for harvest','Long-term vision'],up:'A farmer resting on his hoe, surveying his growing crop. You\'ve invested time and effort — now you wait for the harvest. This is a season for patience and assessment.',rev:'Impatience, poor return on investment, wasted effort.'},
+    {num:'8',name:'Eight of Pentacles',g:'🔨',kw:['Mastery','Craftsmanship','Diligence','Skill-building'],up:'The apprentice working steadily, coin after coin. Mastery through practice. Skill-building, dedication to craft, the satisfaction of doing good work. This is the card of the witch who studies her craft deeply.',rev:'Perfectionism, lack of focus, mediocre work.'},
+    {num:'9',name:'Nine of Pentacles',g:'🦅',kw:['Abundance','Independence','Self-sufficiency','Luxury'],up:'A woman in a lush garden with a falcon on her wrist — she built this herself. Financial independence, self-sufficiency, enjoying the fruits of hard work. A blessing of material and spiritual abundance.',rev:'Financial dependence, overspending, hollow success.'},
+    {num:'10',name:'Ten of Pentacles',g:'🏠',kw:['Legacy','Family wealth','Long-term security','Abundance complete'],up:'The multi-generational scene — grandparent, parents, child, dogs — surrounded by ten pentacles. Legacy, family wealth, lasting security. Everything built is meant to endure and be passed on.',rev:'Financial loss, family conflict, instability.'},
+  ],
+  court:[
+    {num:'Page',name:'Page of Wands',g:'🌱',kw:['Enthusiasm','New ideas','Messenger','Creative child'],up:'The enthusiastic beginner in the realm of fire. New creative ideas, messages about projects, playful exploration of passion.',rev:'Scattered energy, all ideas no follow-through, immaturity.'},
+    {num:'Knight',name:'Knight of Wands',g:'🐎',kw:['Adventure','Action','Impulsiveness','Charging forward'],up:'Charging into adventure on a leaping horse. Bold, fast-moving action, passionate pursuit of goals — but sometimes reckless.',rev:'Recklessness, aggression, burning out fast.'},
+    {num:'Queen',name:'Queen of Wands',g:'🌻',kw:['Confidence','Charisma','Passion','Independence'],up:'She sits on her throne with a black cat at her feet, radiating magnetic confidence. Bold, creative, passionate, deeply independent. The fire woman who knows her own power.',rev:'Jealousy, insecurity masked as confidence, domineering.'},
+    {num:'King',name:'King of Wands',g:'🦁',kw:['Leadership','Vision','Bold decisions','Entrepreneurship'],up:'The visionary leader — bold, charismatic, inspirational. A natural entrepreneur who leads through passion and conviction.',rev:'Arrogance, impulsiveness in leadership, vain.'},
+    {num:'Page',name:'Page of Cups',g:'🐟',kw:['Creative intuition','Dreamer','Emotional messages','Psychic gifts'],up:'A page surprised by a fish leaping from a cup — intuition speaks unexpectedly. Creative imagination, new emotional insights, messages from the unconscious.',rev:'Creative blocks, emotional immaturity, ignoring intuition.'},
+    {num:'Knight',name:'Knight of Cups',g:'🦢',kw:['Romance','Following the heart','Idealism','The quest'],up:'The romantic knight who follows his heart above all. Artistic, idealistic, deeply feeling. Can indicate a romantic pursuit or creative quest.',rev:'Moodiness, unrealistic idealism, heartbreak.'},
+    {num:'Queen',name:'Queen of Cups',g:'🌊',kw:['Empathy','Intuition','Emotional depth','Nurturing'],up:'The emotionally wise queen whose cup is covered — she knows what lies beneath the surface. Deep empathy, psychic ability, nurturing wisdom, the sacred feminine healer.',rev:'Co-dependency, emotional manipulation, overwhelmed by feelings.'},
+    {num:'King',name:'King of Cups',g:'🌊',kw:['Emotional mastery','Wisdom','Calm authority','Compassionate leadership'],up:'The king on his floating throne in a turbulent sea — unmoved, wise, compassionate. Emotional mastery, calm under pressure, a leader who leads with heart.',rev:'Emotional manipulation, repressed feelings, moodiness.'},
+    {num:'Page',name:'Page of Swords',g:'🗡️',kw:['Curiosity','Sharp mind','Vigilance','New information'],up:'Alert, curious, quick-minded. Always watching, gathering information. Intellectual curiosity, sharp wit, new ideas or news.',rev:'Gossip, all talk no action, scattered thinking.'},
+    {num:'Knight',name:'Knight of Swords',g:'⚡',kw:['Ambition','Speed','Directness','Charging forward'],up:'Charging into battle at top speed. Brilliant but ruthless in pursuit of truth and goals. Fast-moving, direct, intellectually sharp.',rev:'Aggression, tactlessness, rushing to judgment.'},
+    {num:'Queen',name:'Queen of Swords',g:'🌬️',kw:['Clear thinking','Independence','Truth','Perceptive wisdom'],up:'She has known sorrow and it made her sharp. Direct, independent, perceptive, unwilling to accept half-truths. The wise woman who has earned her clarity through pain.',rev:'Cold, cruel tongue, bitterness, emotional detachment.'},
+    {num:'King',name:'King of Swords',g:'⚖️',kw:['Intellectual authority','Justice','Ethics','Clear judgment'],up:'The ultimate arbiter of truth. Intellectual authority, clear ethical judgment, a sharp and fair mind. Commands through reason and integrity.',rev:'Manipulative use of intellect, cold cruelty, abuse of power.'},
+    {num:'Page',name:'Page of Pentacles',g:'🌿',kw:['Study','Diligence','New skill','Grounded beginning'],up:'The dedicated student who holds the pentacle and studies it with intense focus. Beginning a new practical skill, dedicated learning, grounded ambition.',rev:'Procrastination, lack of focus, unfulfilled potential.'},
+    {num:'Knight',name:'Knight of Pentacles',g:'🐂',kw:['Reliability','Hard work','Patience','Methodical'],up:'The slowest knight — but the most reliable. Methodical, hardworking, steady. Not flashy, just relentlessly dependable. Gets it done.',rev:'Boredom, stuck in routine, too cautious.'},
+    {num:'Queen',name:'Queen of Pentacles',g:'🌱',kw:['Nurturing abundance','Practical magic','Earth wisdom','Home'],up:'The earth mother who makes abundance from practical wisdom. Nurturing, grounded, deeply connected to the body and earth. Excellent with home, family, and finances.',rev:'Neglecting self for others, financial dependence, smothering.'},
+    {num:'King',name:'King of Pentacles',g:'🏰',kw:['Wealth','Security','Provider','Earth mastery'],up:'The man who built an empire through patience and practical wisdom. Abundance, security, generosity, the ultimate earth energy. Material mastery in service of others.',rev:'Materialism, greed, stubborn, poor financial decisions.'},
+  ]
+};
+
+function showSuit(suit){
+  document.querySelectorAll('.suit-btn').forEach(b=>b.classList.remove('on'));
+  event.currentTarget.classList.add('on');
+  const grid=document.getElementById('minorGrid');
+  grid.innerHTML='';
+  MINOR_DATA[suit].forEach((c,i)=>{
+    const div=document.createElement('div');
+    div.className='t-card';
+    div.innerHTML=`
+      <div class="tc-num">${c.num}</div>
+      <div class="tc-glyph">${c.g}</div>
+      <div class="tc-name">${c.name}</div>
+      <div class="tc-body" id="tc-s-${suit}-${i}">
+        <div class="tc-kw">${c.kw.map(k=>`<span>${k}</span>`).join('')}</div>
+        <h5>✦ Upright</h5><p>${c.up}</p>
+        <h5>↕ Reversed</h5><p>${c.rev}</p>
+      </div>`;
+    div.onclick=()=>{
+      const body=document.getElementById(`tc-s-${suit}-${i}`);
+      const isOpen=body.classList.contains('open');
+      document.querySelectorAll('.tc-body').forEach(b=>b.classList.remove('open'));
+      document.querySelectorAll('.t-card').forEach(c=>c.classList.remove('open'));
+      if(!isOpen){body.classList.add('open');div.classList.add('open');}
+    };
+    grid.appendChild(div);
+  });
+}
+showSuit('wands');
+
+// ════════ READING STEPS ════════
+const STEPS = [
+  {n:'1',t:'Choose Your Deck & Create Sacred Space',
+   p:'Before anything else, choose a deck whose imagery speaks to you. You don\'t need the most popular deck — you need the one that feels alive in your hands. Then prepare your space: light a candle, clear the surface, take three slow breaths. You are entering a different quality of attention.'},
+  {n:'2',t:'Formulate a Clear Question',
+   p:'The quality of your reading depends on the quality of your question. Avoid yes/no questions ("Will I get the job?") in favor of open, exploratory ones: "What do I need to understand about this opportunity?" or "What is blocking me from moving forward?" or simply "What is most important for me to know right now?"'},
+  {n:'3',t:'Shuffle with Intention',
+   p:'Hold your question clearly in your mind and heart as you shuffle. Some readers shuffle until a card falls out. Some shuffle for a set number of times. Some cut the deck into three piles and reassemble. There\'s no one right way — what matters is that you are present, intentional, and not on autopilot.'},
+  {n:'4',t:'Lay the Cards',
+   p:'Choose a spread (see the Spreads tab) appropriate to your question. Place the cards face down first, then turn them over one at a time, pausing at each one before reading the next. This prevents the last card from dominating before you\'ve fully received the first.'},
+  {n:'5',t:'Look Before You Think',
+   p:'Before consulting any meaning guide, look at the card. What do you see? What is your emotional response? What stands out — a color, a figure, a symbol, an animal? Write down your immediate impressions. These raw perceptions contain some of your most accurate intuitive information.'},
+  {n:'6',t:'Weave the Story',
+   p:'Read each card in relation to the others. Tarot is a narrative art — the cards tell a story together. Ask: "What\'s the relationship between card 1 and card 3? Does card 5 answer the question raised by card 2?" Look for patterns: all cups might mean an emotional situation; a preponderance of Swords might indicate mental conflict.'},
+  {n:'7',t:'Ask: What Is This Asking of Me?',
+   p:'The final question in any reading is: <em>What does this want me to do, feel, or understand?</em> Tarot is not a fortune machine — it\'s a conversation. The cards are inviting a response. What action, awareness, or change do they point toward?'},
+  {n:'8',t:'Journal & Close',
+   p:'Record the cards you drew, your interpretations, and what felt true. Then close the space: extinguish your candle, knock on the deck three times, and return to ordinary consciousness. Over months, your journal becomes a map of your inner life that no guidebook could provide.'},
+];
+
+const stepsWrap = document.getElementById('stepsWrap');
+STEPS.forEach(s=>{
+  stepsWrap.innerHTML += `
+    <div class="method-step">
+      <div class="step-num">${s.n}</div>
+      <div class="step-body"><h4>${s.t}</h4><p>${s.p}</p></div>
+    </div>`;
+});
+
+// ════════ SPREADS ════════
+const SPREADS = [
+  {name:'One Card Draw — Daily Oracle',cards:'1 card',
+   desc:'The most powerful spread is the simplest. One card each morning sets a theme, a question, or a lens for the day. Pull one card and ask: "What energy should I embody today?" or "What does this day want to teach me?"',
+   positions:[{n:'1',label:'The day\'s teaching — your lens for the next 24 hours'}],
+   tip:'Do this every day for 78 days — one full deck cycle — and you will know each card as an old friend.'},
+  {name:'Three Card Spread — Past · Present · Future',cards:'3 cards',
+   desc:'The classic, versatile spread. Works for almost any question. The three cards form a narrative arc that illuminates where you\'ve been, where you are, and where you\'re heading.',
+   positions:[{n:'1',label:'Past — what has led to this'},{n:'2',label:'Present — what is happening now'},{n:'3',label:'Future — where this is heading if things continue'}],
+   tip:'You can also use as: Situation · Action · Outcome, or Mind · Body · Spirit.'},
+  {name:'Three Card Spread — Mind · Body · Spirit',cards:'3 cards',
+   desc:'Perfect for personal insight or healing readings. Each card addresses a different layer of your being at this moment.',
+   positions:[{n:'1',label:'Mind — what your thoughts are doing'},{n:'2',label:'Body — what your physical/material situation needs'},{n:'3',label:'Spirit — what your soul is calling for'}],
+   tip:'Use this at new and full moons for a snapshot of where you are.'},
+  {name:'The Celtic Cross',cards:'10 cards',
+   desc:'The most famous spread in tarot — comprehensive, revealing, and sometimes humbling. Best for significant situations that need full examination. Takes practice to master, but it offers extraordinary depth.',
+   positions:[{n:'1',label:'Present — the heart of the situation'},{n:'2',label:'Challenge — what crosses or complicates you (placed sideways over card 1)'},{n:'3',label:'Root — subconscious basis, what underlies everything'},{n:'4',label:'Recent past — what is passing away'},{n:'5',label:'Crown — what you aspire to, best possible outcome'},{n:'6',label:'Near future — what is approaching'},{n:'7',label:'Your attitude — how you see yourself in this'},{n:'8',label:'External influences — how others see or affect this'},{n:'9',label:'Hopes and fears — what you most hope for, or fear'},{n:'10',label:'Final outcome — where this is going'}],
+   tip:'Don\'t start with the Celtic Cross. Learn it after you\'re comfortable with smaller spreads. Then it will speak volumes.'},
+  {name:'The Sabbat Spread',cards:'8 cards',
+   desc:'One card for each Sabbat of the Wheel of the Year — a full-year reading best done at Yule or Samhain. Each card reveals the theme and energy of that season in the coming year.',
+   positions:[{n:'1',label:'Yule — what is being reborn in you'},{n:'2',label:'Imbolc — what creative spark is igniting'},{n:'3',label:'Ostara — what new beginning is emerging'},{n:'4',label:'Beltane — where passion and union are calling'},{n:'5',label:'Litha — where you will stand at your peak'},{n:'6',label:'Lughnasadh — what you will harvest'},{n:'7',label:'Mabon — what you must release with gratitude'},{n:'8',label:'Samhain — what will transform or die'}],
+   tip:'This is a beautiful Yule ritual. Cast this spread by candlelight on the longest night.'},
+  {name:'New Moon Intention Spread',cards:'4 cards',
+   desc:'Cast at each new moon to set clear intentions and understand what energy you are working with for the lunar cycle.',
+   positions:[{n:'1',label:'Theme — the energy of this lunar cycle for you'},{n:'2',label:'Intention — what to plant and focus on'},{n:'3',label:'Release — what to let go of to make space'},{n:'4',label:'Guidance — the wisdom or action to carry forward'}],
+   tip:'Pair with the full moon spread below — lay them side by side at the full moon to see the arc of manifestation.'},
+  {name:'Full Moon Release Spread',cards:'3 cards',
+   desc:'Cast at the full moon to illuminate what has come to fruition and what needs to be released.',
+   positions:[{n:'1',label:'What has come to light — what is now visible and complete'},{n:'2',label:'What must be released — what the moon asks you to let go'},{n:'3',label:'What remains — the seed to carry into the next cycle'}],
+   tip:'Burn the paper you wrote your release intention on by moonlight after this reading.'},
+];
+
+const spreadsWrap = document.getElementById('spreadsWrap');
+SPREADS.forEach((s,i)=>{
+  const div = document.createElement('div');
+  div.className='spread-card';
+  div.innerHTML=`
+    <div class="sp-top">
+      <div class="sp-name">${s.name}</div>
+      <div class="sp-cards">${s.cards}</div>
+    </div>
+    <div class="sp-body" id="sp-${i}">
+      <p>${s.desc}</p>
+      <div class="pos-grid" style="margin:.8rem 0">
+        ${s.positions.map(p=>`<div class="pos-item"><div class="pos-num">Position ${p.n}</div><div class="pos-label">${p.label}</div></div>`).join('')}
+      </div>
+      <div style="background:rgba(184,134,42,.08);border-left:3px solid var(--gold);padding:.6rem .9rem;border-radius:0 3px 3px 0">
+        <p style="font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:.88rem;color:rgba(242,232,213,.8)">✦ ${s.tip}</p>
+      </div>
+    </div>`;
+  div.onclick=()=>{
+    const body=document.getElementById(`sp-${i}`);
+    const isOpen=body.classList.contains('open');
+    document.querySelectorAll('.sp-body').forEach(b=>b.classList.remove('open'));
+    document.querySelectorAll('.spread-card').forEach(c=>c.classList.remove('open'));
+    if(!isOpen){body.classList.add('open');div.classList.add('open');}
+  };
+  spreadsWrap.appendChild(div);
+});
+</script>
+</body>
+</html>
